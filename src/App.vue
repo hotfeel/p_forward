@@ -11,7 +11,7 @@
           <el-main>
             <el-row>
               <el-col :span="12" class="el-col-advice"><c-advice></c-advice></el-col>
-              <el-col :span="12"><div></div></el-col>
+              <el-col :span="12" class="el-col-caledar"><c-caledar></c-caledar></el-col>
             </el-row>
             <el-row>
               <el-col :span="12"><div></div></el-col>
@@ -29,13 +29,15 @@
   import CHeader from '@/components/m_header/head'
   import MMeau from '@/components/m_side/meau'
   import CAdvice from '@/container/home/advice'
+  import CCaledar from '@/container/home/caledar'
 
   export default {
    name: 'App',
     components:{
       CHeader,
       MMeau,
-      CAdvice
+      CAdvice,
+      CCaledar
     }
   }
 </script>
@@ -59,5 +61,9 @@
   height 400px
   border 1px solid gainsboro
 }
+  .el-col-caledar{
+    height 400px
+    border 1px solid gainsboro
+  }
 
 </style>
