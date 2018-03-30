@@ -53,13 +53,12 @@
     }
   }
 </script>
-<style>
+<style scoped lang="stylus" >
   .el-menu{
     border-right : solid 0px #171111;
-    width: 15%;
-    min-width: 200px;
     color: white;
     background-color: black;
+    min-width: 200px;
   }
 
 </style>

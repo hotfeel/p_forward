@@ -6,7 +6,7 @@
     </div>
     <div class="head_right">
       <ul>
-        <li class="iconfont icon-tuichu1"> 退出</li>
+        <li class="iconfont icon-tuichu"> 退出</li>
       </ul>
     </div>
   </div>
@@ -14,6 +14,7 @@
 </template>
 <script>
   import Moment from 'moment'
+
   export default {
     data(){
       return {
@@ -59,5 +60,8 @@
   .head_right li{
     font-size 15px
   }
+  .el-badge__content.is-fixed{
+      width 10px
+    }
 
 </style>
