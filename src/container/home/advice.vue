@@ -8,7 +8,7 @@
       <el-tab-pane label="审批" name="first">
         <el-row class="ad_row">
           <el-col class="iconfont icon-tongzhi el-col1" :span="17">
-            <span> 公告：国务院关于调整证券交易印花税中央与地方分享比例的通知</span>
+            <span> 公告：国务院调整证券交易印花税中央与地方分享比例的通知</span>
           </el-col>
           <el-col class = "el-col2" :span="7">
             <span>2018-03-29 18:36</span>
