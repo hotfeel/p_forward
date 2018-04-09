@@ -1,20 +1,25 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import head from '@/components/m_header/head'
-import VSchart from '@/components/echarts/v-schart'
+import Home from '@/container/home/home'
+import DepartManage from '@/container/departManage/departManage'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'VSchart',
-      component: VSchart
+      path: '/Home',
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/departManage',
+      name: 'DepartManage',
+      component: DepartManage
     },{
-      path: '/head',
-      name: 'head',
-      component: head
+      path: '/',
+      name: 'DepartManage',
+      component: DepartManage
     }
   ]
 })

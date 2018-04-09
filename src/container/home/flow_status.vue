@@ -82,7 +82,19 @@
           name: '王小虎',
           address: '上海市普陀区金沙江路 1516 弄',
           status: 1
-        }]
+        }],
+        currentPage1: 5,
+        currentPage2: 5,
+        currentPage3: 5,
+        currentPage4: 4
+      }
+    },
+    methods: {
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
       }
     }
   }

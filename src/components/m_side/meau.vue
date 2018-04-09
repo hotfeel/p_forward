@@ -8,8 +8,13 @@
         @close="handleClose"
         background-color="#545c64"
         text-color="#fff"
+        :router="true"
         active-text-color="#ffd04b">
-        <el-submenu index="1">
+        <el-menu-item index="/home">
+          <i class="iconfont icon-shouye home_icon"></i>
+          <span slot="title">首页</span>
+        </el-menu-item>
+        <el-submenu index="2">
           <template slot="title">
             <i class="el-icon-menu"></i>
             <span>导航一</span>
@@ -23,7 +28,7 @@
             <span slot="title">菜单二</span>
           </el-menu-item>
         </el-submenu>
-        <el-submenu index="2">
+        <el-submenu index="3">
           <template slot="title">
             <i class="el-icon-goods"/>
             <span>导航二</span>
@@ -59,6 +64,9 @@
     color: white;
     background-color: black;
     min-width: 200px;
+  }
+  .home_icon{
+    margin 0px 9px 0px 4px
   }
 
 </style>

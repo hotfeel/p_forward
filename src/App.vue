@@ -9,16 +9,7 @@
             <m-meau></m-meau>
           </el-aside>
           <el-main>
-            <el-row>
-              <el-col :span="14" class="el-col-advice"><c-advice></c-advice></el-col>
-              <el-col :span="10 " class="el-col-caledar"><c-caledar></c-caledar></el-col>
-            </el-row>
-            <el-row>
-              <c-flow></c-flow>
-            </el-row>
-            <el-row>
-              <c-report></c-report>
-            </el-row>
+            <router-view></router-view>
           </el-main>
         </el-container>
       </el-container>
@@ -28,10 +19,7 @@
 <script>
   import CHeader from '@/components/m_header/head'
   import MMeau from '@/components/m_side/meau'
-  import CAdvice from '@/container/home/advice'
-  import CCaledar from '@/container/home/caledar'
-  import CFlow from '@/container/home/flow_status'
-  import CReport from '@/container/home/report_forms'
+  import CHome from '@/container/home/home'
   import ElRow from "element-ui/packages/row/src/row";
 
 
@@ -41,15 +29,12 @@
       ElRow,
       CHeader,
       MMeau,
-      CAdvice,
-      CCaledar,
-      CFlow,
-      CReport
+      CHome
     }
   }
 </script>
 
-<style  scoped lang="stylus">
+<style scoped lang="stylus">
 #app {
   margin-top: 0px;
   display block
@@ -63,13 +48,5 @@
 }
 .el-main{
   padding 0px 0px 0px 0px
-}
-.el-col-advice{
-  height 320px
-  border 1px solid gainsboro
-}
-.el-col-caledar{
-  height 320px
-  border 1px solid gainsboro
 }
 </style>
