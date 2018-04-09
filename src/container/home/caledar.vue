@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="c-caledar">
     <el-row  class="e-advice">
       日历提醒
     </el-row>
@@ -31,7 +31,7 @@
     }
   }
 </script>
-<style lang="stylus" >
+<style lang="stylus">
   .__vev_calendar-wrapper .cal-wrapper{
     padding 15px 20px 0px 15px
   }
