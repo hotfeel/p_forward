@@ -2,7 +2,7 @@
   <div class="head">
     <div class="head_left">
       <span>【 {{date}} 】</span>
-      <span>上海-运输智能化部-罗典</span>
+      <span>企业管理系统</span>
     </div>
     <div class="head_right">
       <ul>

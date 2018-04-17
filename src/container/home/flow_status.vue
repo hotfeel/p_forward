@@ -1,44 +1,44 @@
 <template>
   <div>
-    <el-row class="flow_title">我的工作流</el-row>
+    <el-row class="flow_title">订单执行进程</el-row>
     <el-table
       :data="tableData"
       border
       style="width: 100%">
       <el-table-column
-        prop="date"
-        label="提交日期"
+        prop="orderNum"
+        label="订单编号"
         width="110">
       </el-table-column>
       <el-table-column
-        prop="name"
-        label="工作流名称"
+        prop="custName"
+        label="客户简称"
         width="110">
       </el-table-column>
       <el-table-column
-        prop="name"
-        label="当前审批人"
+        prop="orderDate"
+        label="订单日期"
         width="110">
       </el-table-column>
       <el-table-column
-        prop="name"
-        label="当前审批人"
+        prop="deliveryDate"
+        label="交货日期"
         width="110">
       </el-table-column>
       <el-table-column
-        prop="name"
-        label="当前审批人"
+        prop="salesMan"
+        label="业务员"
         width="110">
       </el-table-column>
       <el-table-column
-        label="工作流状态">
+        label="当前状态">
         <template slot-scope="scope">
         <el-steps :active="scope.row.status" simple>
-          <el-step title="步骤 1" ></el-step>
-          <el-step title="步骤 2" ></el-step>
-          <el-step title="步骤 3" ></el-step>
-          <el-step title="步骤 4" ></el-step>
-          <el-step title="步骤 5" ></el-step>
+          <el-step title="报价" ></el-step>
+          <el-step title="订单" ></el-step>
+          <el-step title="采购" ></el-step>
+          <el-step title="出货" ></el-step>
+          <el-step title="结算" ></el-step>
         </el-steps>
         </template>
       </el-table-column>
@@ -63,30 +63,36 @@
     data(){
       return {
         tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-          status: 1
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄',
+          orderNum: 'A201801189',
+          custName: '王小虎',
+          orderDate: '2018-01-18',
+          deliveryDate: '2018-01-20',
+          salesMan:'小李',
           status: 2
         }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄',
-          status: 3
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄',
+          orderNum: 'A201801141',
+          custName: '白雪',
+          orderDate: '2018-01-14',
+          deliveryDate: '2018-01-16',
+          salesMan:'小王',
+          approval:'赵倩',
           status: 1
+        }, {
+          orderNum: 'B201803157',
+          custName: '刘子千',
+          orderDate: '2018-03-15',
+          deliveryDate: '2018-03-28',
+          salesMan:'游天明',
+          status: 4
+        }, {
+          orderNum: 'B201802019',
+          custName: '白兰度',
+          orderDate: '2018-02-19',
+          deliveryDate: '2018-03-12',
+          salesMan:'焦良艮',
+          status: 3
         }],
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4
+        currentPage3: 1
       }
     },
     methods: {

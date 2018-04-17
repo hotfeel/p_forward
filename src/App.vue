@@ -38,13 +38,17 @@
 #app {
   margin-top: 0px;
   display block
+  height 100%
 }
 .el-header{
   padding 0px 0px 0px 0px
 }
 .el-aside{
-  background-color rgb(84, 92, 100)
-  height 1470px
+  background-color #5170b1
+  height 100%
+}
+.el-container{
+  height 100%
 }
 .el-main{
   padding 0px 0px 0px 0px
