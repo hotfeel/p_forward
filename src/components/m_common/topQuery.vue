@@ -1,7 +1,7 @@
 <template>
   <div class="query_div">
     <el-row class="query_row">
-      <el-button type="button"
+      <el-button type="primary"
                  class="q_query_btn"
                  @click="togglebox">
         <i class="iconfont icon-gengduo"
@@ -132,35 +132,36 @@
   }
 </script>
 <style lang="stylus" >
+  .query_div{
+    width 90px
+  }
   // 整个大的查询头部DIV
   .query_row{
-    height 30px
-    border-bottom 1px solid gainsboro
     // 重置element-ui上的按钮样式
-    .el-button:focus, .el-button:hover{
+  /*  .el-button:focus, .el-button:hover{
       color black
       border-color gainsboro
       background-color white
-    }
+    }*/
     // 查询按钮样式
     .q_query_btn{
       height 28px
       width 80px
-      line-height 29px
+      line-height 28px
       padding 0px 10px 0px 4px
-      margin  0px 10px
+      /*margin  0px 10px
       border 0px
       border 1px solid gainsboro
       background-color white
       outline none
       font-size 16px
-      margin 1px 0px 0px 1px
+      margin 1px 0px 0px 1px*/
       // 查询按钮上的图标样式
       i{
         display block
         float left
         font-size 22px
-        color gray
+        color white
         margin-top -1px
       }
     }
@@ -177,13 +178,13 @@
   // 可折叠搜索框整体样式
   .box{
     width 250px
-    height 500px;
+    height auto;
     padding 10px
     border 1px solid gray
-    overflow auto
+    overflow hidden
     border-radius 10px
     position absolute
-    top 30px
+    top 35px
     background-color #fcfcfc
     z-index 5
     // 折叠框内搜索输入框样式
@@ -231,14 +232,11 @@
       width 200px
     }
   }
-  // 以下为可折叠搜索框动态收放样式
   .q_trans-leave-active,.q_trans-enter-active{
-    transition:  all 1s ease;
+    transition: all .1s ease;
   }
-  .q_trans-leave-active,.q_trans-enter{
-    height:0px !important;
-  }
-  .q_trans-leave,.q_trans-enter-active{
-    height: 500px;
+  .q_trans-enter,.q_trans-leave-to{
+    transform: translateX(30px);
+    opacity: 0;
   }
 </style>

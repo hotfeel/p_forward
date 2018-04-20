@@ -4,7 +4,7 @@ import Home from '@/container/home/home'
 import DepartManage from '@/container/departManage/departManage'
 import Undo from '@/components/m_common/undo.vue'
 import QueryOrder from '@/container/order/queryOrder'
-
+import OrderDetail from '@/container/order/orderDetail'
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +27,11 @@ export default new Router({
       path:'/queryOrder',
       name:'queryOrder',
       component:QueryOrder
+    },
+    {
+      path:'/orderDetail',
+      name:'orderDetail',
+      component:OrderDetail
     },
     {
       path: '*',
