@@ -5,6 +5,11 @@ import DepartManage from '@/container/departManage/departManage'
 import Undo from '@/components/m_common/undo.vue'
 import QueryOrder from '@/container/order/queryOrder'
 import OrderDetail from '@/container/order/orderDetail'
+import Demo from '@/container/demo/demo'
+import Demo2 from '@/container/demo/demo2'
+import Demo3 from '@/container/demo/demo3'
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -20,8 +25,12 @@ export default new Router({
       component: DepartManage
     },{
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'Demo3',
+      component: Demo3
+    },{
+      path: '/demo2',
+      name: 'Demo2',
+      component: Demo2
     },
     {
       path:'/queryOrder',

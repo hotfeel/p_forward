@@ -1,5 +1,7 @@
 <template>
   <div>
+    {{formData.name}}
+    <input v-model="formData.name" @change=""/>
   <el-row>
     <el-col :span="14" class="el-col-advice"><c-advice></c-advice></el-col>
     <el-col :span="10 " class="el-col-caledar"><c-caledar></c-caledar></el-col>
@@ -13,6 +15,7 @@
   </div>
 </template>
 <script>
+  import { mapGetters, mapActions } from 'vuex'
   import CAdvice from './advice'
   import CCaledar from './caledar'
   import CFlow from './flow_status'
@@ -25,7 +28,12 @@
       CCaledar,
       CFlow,
       CReport
-    }
+    },
+    computed: {
+      ...mapGetters({
+        formData: 'formData'
+      })
+    },
   }
 </script>
 <style scoped lang="stylus">

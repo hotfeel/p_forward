@@ -22,7 +22,7 @@ export const post = ({url, data}) => {
             },
             cancelToken: source.token
         }).then(res => {
-            if (res.data.status === 0) {
+            if (res.data.status == 0) {
                 resolve(res.data.data)
             } else { // 后端定义的错误
                 Message({
@@ -47,7 +47,7 @@ export const get = ({url, data}) => {
             cancelToken: source.token,
             params: data
         }).then(res => {
-            if (res.data.status === 0) {
+            if (res.data.status == 0) {
                 resolve(res.data.data)
             } else { // 后端定义的错误
                 Message({

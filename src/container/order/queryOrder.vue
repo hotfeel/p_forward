@@ -22,16 +22,27 @@
                 </el-table-column>
                 <el-table-column
                   fixed
-                  prop="orderNum"
+                  label="操作"
+                  width="90">
+                  <template slot-scope="scope">
+                    <a class="el-icon-search" title="详情查询" @click="queryOrderDetail(scope.$index, scope)"></a>
+                    <a class="el-icon-edit" title="编辑" @click="deleteRow(scope.$index, scope)"></a>
+                    <a class="el-icon-delete" title="删除" @click="deleteRow(scope.$index, scope)"></a>
+                  </template>
+                </el-table-column>
+
+                <el-table-column
+                  fixed
+                  prop="orderNumber"
                   label="销售订单号"
                   sortable
                   width="150px">
                 </el-table-column>
                 <el-table-column
-                  prop="custCode"
+                  prop="custNumber"
                   sortable
                   label="客户编号"
-                  width="120">
+                  width="160">
                 </el-table-column>
                 <el-table-column
                   prop="custShortName"
@@ -41,19 +52,21 @@
                 </el-table-column>
                 <el-table-column
                   sortable
-                  prop="contractDate"
+                  prop="constractDate"
                   label="合同日期"
+                  :formatter="dateFormat"
                   width="170">
                 </el-table-column>
                 <el-table-column
                   prop="deliveryDate"
                   label="交货日期"
+                  :formatter="dateFormat"
                   width="170">
                 </el-table-column>
                 <el-table-column
                   prop="ownCompany"
                   label="我方公司"
-                  width="120">
+                  width="140">
                 </el-table-column>
                 <el-table-column
                   prop="currency"
@@ -91,12 +104,13 @@
                   width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="city"
+                  prop="createDate"
                   label="制单日期"
-                  width="120">
+                  width="120"
+                  :formatter="dateFormat">
                 </el-table-column>
                 <el-table-column
-                  prop="city"
+                  prop="creator"
                   label="制单人"
                   width="120">
                 </el-table-column>
@@ -129,16 +143,48 @@
   </el-container>
 </template>
 <script>
+  import Moment from 'moment'
   import CTopQuery from '@/components/m_common/topQuery'
   import ElFooter from "element-ui/packages/footer/src/main";
+  import { queryOrderList } from '@/api/modules/order'
 
   export  default {
     components:{
       ElFooter,
       CTopQuery
-    },methods:{
+    },
+    created(){
+      this.queryOrderList();
+    },
+    methods:{
+      // 删除某条数据
+      deleteRow:function (index,row) {
+        console.log(index);
+        console.log(row);
+        console.log(row.row.orderNumber);
+      },
+      // 查看订单详情
+      queryOrderDetail:function(index,row){
+        this.$router.push({name:'orderDetail',query:{orderNumber:row.row.orderNumber}});
+      },
+      dateFormat:function(row, column, cellValue, index){
+        // ("YYYY-MM-DD HH:mm:ss");
+        return Moment(cellValue).format("YYYY-MM-DD");
+      },
       toOrderDetail:function(){
         this.$router.push({name:'orderDetail'});
+      },
+      queryOrderList(){
+        queryOrderList().then(res=>{
+          this.tableDate.length = 0;
+          this.tableDate = res;
+        })
+      },
+      handleSizeChange(){
+
+      },
+      handleCurrentChange(){
+
       }
     },
     data() {
@@ -148,348 +194,11 @@
         input2:341,
         input3:189,
         input4:123,
-        tableDate:[
-        {
-          sortNum:"1",
-          orderNum:'A1232345234534',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A1116224344D',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A1254753523423',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123523534673',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        },{
-          orderNum:'A123019S234FASD',
-          custCode:'AXDF8846675',
-          custShortName:'李魁',
-          contractDate:'2018-04-11 14:38:03',
-          deliveryDate:'2018-04-16 15:14:32',
-          ownCompany:'阿里巴巴',
-          currency:'人民币',
-          courier:'杨志',
-          paymentWay:'现金',
-          totalGoodsValue:'5034',
-          totalCost:'2467',
-          totalMoney:'48966',
-          grossProfit:'1084',
-          createDate:'2018-04-05 08:09:12',
-          creator:'宋江'
-        }
-      ]
+        currentPage4:1,
+        tableDate:[]
       }
     }
+
   }
 </script>
 <style lang="stylus" >
@@ -512,6 +221,19 @@
          line-height 18px
          color gray
        }
+      // 订单列表前方操作按钮样式
+      .el-table__row{
+        a{
+          //color #409eff
+          font-size 16px;
+          margin-right 4px
+
+        }
+        a:hover{
+          color #409eff
+          cursor pointer
+        }
+      }
   }
   // 底部合计信息条样式
   .d_el_footer{
