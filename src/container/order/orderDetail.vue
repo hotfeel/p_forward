@@ -1,12 +1,12 @@
 <template>
   <el-container class="d_orderDetail">
-      <el-header style="height: 50px;">
-        <el-row class="e_row_header e_common">
-          <el-button icon="iconfont icon-baocun" class="btn_common">保存</el-button>
-        </el-row>
-      </el-header>
-      <el-main class="content_div">
-        <el-row class="e_common orderDeatail_content">
+    <el-header style="height: 50px;">
+      <el-row class="e_row_header e_common">
+        <el-button icon="iconfont icon-baocun" class="btn_common" @click="saveOrder">保存</el-button>
+      </el-row>
+    </el-header>
+    <el-main class="content_div">
+      <el-row class="e_common orderDeatail_content">
         <el-collapse v-model="activeNames">
           <el-collapse-item title="主要信息" name="1">
             <el-row>
@@ -16,15 +16,15 @@
               <el-col :span="1" class="col_span">  <label>客户简称</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.custShortName">  </el-input></el-col>
             </el-row>
             <el-row>
-              <el-col :span="1" class="col_span">  <label>客户订单号</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>客户订单号</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.custOrderNumber">  </el-input></el-col>
               <el-col :span="1" class="col_span">  <label>交货日期</label></el-col><el-col :span="4">  <el-date-picker :readonly = "readOnly"  v-model="order.deliveryDate" type="date"/></el-col>
               <el-col :span="1" class="col_span">  <label>我方公司</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.ownCompany">  </el-input></el-col>
               <el-col :span="1" class="col_span">  <label>币种</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.currency">  </el-input></el-col>
             </el-row>
             <el-row>
-              <el-col :span="1" class="col_span">  <label>汇率</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>保险比率</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>佣金比率</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>汇率</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.exchargeRate">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>保险比率</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.insuranceRatio">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>佣金比率</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly"  v-model="order.commissionRatio">  </el-input></el-col>
               <el-col :span="1" class="col_span">  <label>业务员</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.courier">  </el-input></el-col>
             </el-row>
             <el-row>
@@ -35,32 +35,33 @@
           <el-collapse-item title="辅助信息" name="2">
             <el-row>
               <el-col :span="1" class="col_span">  <label>付款方式</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.paymentWay"></el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>签约地点</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>运输方式</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>交货地点</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>签约地点</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.contractAddress">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>运输方式</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.transWay">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>交货地点</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.deliveryAddress">  </el-input></el-col>
             </el-row>
             <el-row>
-              <el-col :span="1" class="col_span">  <label>费用承担</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>包装要求</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>品质保证</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>违约责任</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>费用承担</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.chargeBear">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>包装要求</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.bagRequire">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>品质保证</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.qualityAss">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>违约责任</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.liability">  </el-input></el-col>
             </el-row>
             <el-row>
-              <el-col :span="1" class="col_span">  <label>合同纠纷</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>合同纠纷</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.contractDispute">  </el-input></el-col>
             </el-row>
           </el-collapse-item>
           <el-collapse-item title="订单产品明细" name="3">
             <div class="div_product">
               <el-button icon="iconfont icon-xinzeng" class="btn_fun" @click="addProduct">新建</el-button>
-              <el-button icon="iconfont icon-xinzeng" class="btn_fun"  @click="addProduct">复制</el-button>
-              <el-button icon="iconfont icon-baocun" class="btn_fun">保存</el-button>
+              <el-button icon="iconfont icon-xinzeng" class="btn_fun"  @click="copyProduct">复制</el-button>
+              <el-button icon="el-icon-edit" class="btn_fun"  @click="editProduct">编辑</el-button>
               <el-button icon="el-icon-delete" class="btn_fun" @click="delete_row">删除</el-button>
             </div>
             <el-table
-              :data="order.orderProducts"
+              :data="order.orderProductList"
               border
               style="width: 100%" ref="productTable"
-              @select="tableSelect">
+              @select="tableSelect"
+              :row-class-name="tableRowClassName">
               <el-table-column
                 fixed
                 type="selection"
@@ -134,28 +135,28 @@
                 <label>总货值(元)</label>
               </el-col>
               <el-col :span="4">
-                <el-input :readonly = "readOnly" value="87985">
+                <el-input :readonly = "readOnly">
                 </el-input>
               </el-col>
               <el-col :span="1" class="col_span d_t_span">
                 <label>总数量</label>
               </el-col>
               <el-col :span="4">
-                <el-input :readonly = "readOnly" value="492">
+                <el-input :readonly = "readOnly">
                 </el-input>
               </el-col>
               <el-col :span="1" class="col_span d_t_span">
                 <label>总箱数</label>
               </el-col>
               <el-col :span="4">
-                <el-input :readonly = "readOnly" value="231">
+                <el-input :readonly = "readOnly">
                 </el-input>
               </el-col>
               <el-col :span="1" class="col_span">
                 <label>总毛重(kg)</label>
               </el-col>
               <el-col :span="4">
-                <el-input :readonly = "readOnly" value="2341">
+                <el-input :readonly = "readOnly">
                 </el-input>
               </el-col>
             </el-row>
@@ -164,105 +165,110 @@
                 <label>总净重(kg)</label>
               </el-col>
               <el-col :span="4">
-                <el-input :readonly = "readOnly" value="4123">
+                <el-input :readonly = "readOnly">
                 </el-input>
               </el-col>
               <el-col :span="1" class="col_span d_t_span">
                 <label>总体积(立方)</label>
               </el-col>
               <el-col :span="4">
-                <el-input :readonly = "readOnly" value="234">
+                <el-input :readonly = "readOnly">
                 </el-input>
               </el-col>
               <el-col :span="1" class="col_span d_t_span">
                 <label>费用合计(元)</label>
               </el-col>
               <el-col :span="4">
-                <el-input :readonly = "readOnly" value="58755">
+                <el-input :readonly = "readOnly">
                 </el-input>
               </el-col>
               <el-col :span="1" class="col_span">
                 <label>总金额(元)</label>
               </el-col>
               <el-col :span="4">
-                <el-input :readonly = "readOnly" value="545855">
+                <el-input :readonly = "readOnly">
                 </el-input>
               </el-col>
             </el-row>
           </el-collapse-item>
         </el-collapse>
-        </el-row>
-        <!--新增产品订单信息-->
-        <el-dialog
-          title="产品信息"
-          :visible.sync="dialogVisible"
-          width="70%"
-          center
-          :before-close="handleClose" class="dialog_product">
-            <el-row class="row_pro_content">
-              <el-form ref="form" :model="form">
-                <el-row class="row_product">
-                  <el-col :span="2"><span>中文名称</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.name"></el-input></el-col>
-                  <el-col :span="3"><span>英文名称</span> </el-col> <el-col :span="5"><el-input placeholder="请输入内容"></el-input> </el-col>
-                  <el-col :span="3"><span>产品编码</span> </el-col> <el-col :span="5"><el-input placeholder="请输入内容"></el-input> </el-col>
-                </el-row>
-                <el-row class="row_product">
-                  <el-col :span="2"><span>型号规格</span> </el-col> <el-col :span="5"><el-input placeholder="请输入内容"></el-input> </el-col>
-                  <el-col :span="3"><span>产品描述</span> </el-col> <el-col :span="5"><el-input placeholder="请输入内容"></el-input> </el-col>
-                  <el-col :span="3"><span>品牌</span> </el-col> <el-col :span="5"><el-input placeholder="请输入内容"></el-input> </el-col>
-                </el-row>
-                <el-row class="row_product">
-                  <el-col :span="2"> <span>净重</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>毛重</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>单位</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                </el-row><el-row class="row_product">
-                <el-col :span="2"> <span>产品尺寸</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                <el-col :span="3"><span>外箱重量</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                <el-col :span="3"> <span>外箱宽度</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-              </el-row>
-                <el-row class="row_product">
-                  <el-col :span="2"> <span>外箱体积</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>客户货号</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>包装方式</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                </el-row>
-                <el-row class="row_product">
-                  <el-col :span="2"> <span>交货日期</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>是否开票</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>合同数量</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                </el-row>
-                <el-row class="row_product">
-                  <el-col :span="2"> <span>销售单价</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>默认供应商编号</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>默认采购单价</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                </el-row>
-                <el-row class="row_product">
-                  <el-col :span="2"> <span>默认采购总价</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>总箱数</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>总体积</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                </el-row>
-                <el-row class="row_product">
-                  <el-col :span="2"> <span>总毛重</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>总净重</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>下单数量</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                </el-row>
-                <el-row class="row_product">
-                  <el-col :span="2"> <span>未下单数量</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>发货数量</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                  <el-col :span="3"> <span>未发货数量</span></el-col><el-col :span="5"> <el-input placeholder="请输入内容"></el-input></el-col>
-                </el-row>
-              <el-row style="text-align: right;">
-                <el-button type="primary" @click="cancelProduct">取消</el-button>
-                <el-button type="primary" @click="saveProduct">保存</el-button>
-              </el-row>
-              </el-form>
+      </el-row>
+      <!--新增产品订单信息-->
+      <el-dialog
+        title="产品信息"
+        :visible.sync="dialogVisible"
+        width="70%"
+        center
+        :before-close="handleClose" class="dialog_product">
+        <el-row class="row_pro_content">
+          <el-form ref="form" :model="form">
+            <el-row v-if="false">
+              <el-col :span="0"><span>ID</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.id"></el-input></el-col>
+              <el-col :span="0"><span>orderNumber</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.orderNumber"></el-input></el-col>
+              <el-col :span="0"><span>index</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.index"></el-input></el-col>
             </el-row>
-        </el-dialog>
-      </el-main>
+            <el-row class="row_product">
+              <el-col :span="2"><span>中文名称</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.name"></el-input></el-col>
+              <el-col :span="3"><span>英文名称</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.enName"></el-input> </el-col>
+              <el-col :span="3"><span>产品编码</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.code"></el-input> </el-col>
+            </el-row>
+            <el-row class="row_product">
+              <el-col :span="2"><span>型号规格</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.model"></el-input> </el-col>
+              <el-col :span="3"><span>产品描述</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.description"></el-input> </el-col>
+              <el-col :span="3"><span>品牌</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.brand"></el-input> </el-col>
+            </el-row>
+            <el-row class="row_product">
+              <el-col :span="2"> <span>净重</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.netWeight"></el-input></el-col>
+              <el-col :span="3"> <span>毛重</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.roughWeight"></el-input></el-col>
+              <el-col :span="3"> <span>单位</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.unit"></el-input></el-col>
+            </el-row><el-row class="row_product">
+            <el-col :span="2"> <span>产品尺寸</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.size"></el-input></el-col>
+            <el-col :span="3"><span>外箱重量</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.outBoxWeight"></el-input></el-col>
+            <el-col :span="3"> <span>外箱宽度</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.outBoxWidth"></el-input></el-col>
+          </el-row>
+            <el-row class="row_product">
+              <el-col :span="2"> <span>外箱体积</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.outBoxVolume"></el-input></el-col>
+              <el-col :span="3"> <span>客户货号</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.freightNum"></el-input></el-col>
+              <el-col :span="3"> <span>包装方式</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.packageMethod"></el-input></el-col>
+            </el-row>
+            <el-row class="row_product">
+              <el-col :span="2"> <span>交货日期</span></el-col><el-col :span="5"> <el-date-picker v-model="orderProduct.deliveryDate" type="date"/></el-col>
+              <el-col :span="3"> <span>是否开票</span></el-col><el-col :span="5"> <el-select v-model="orderProduct.ticket"><el-option label="是" :value="true"></el-option><el-option label="否" :value="false"></el-option></el-select></el-col>
+              <el-col :span="3"> <span>合同数量</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.dealCount"></el-input></el-col>
+            </el-row>
+            <el-row class="row_product">
+              <el-col :span="2"> <span>销售单价</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.salePrice"></el-input></el-col>
+              <el-col :span="3"> <span>供应商编号</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.supplierNum"></el-input></el-col>
+              <el-col :span="3"> <span>采购单价</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.purchasePrice"></el-input></el-col>
+            </el-row>
+            <el-row class="row_product">
+              <el-col :span="2"> <span>采购总价</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.purchaseTotalPrice"></el-input></el-col>
+              <el-col :span="3"> <span>总箱数</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.totalBox"></el-input></el-col>
+              <el-col :span="3"> <span>总体积</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.totalVolume"></el-input></el-col>
+            </el-row>
+            <el-row class="row_product">
+              <el-col :span="2"> <span>总毛重</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.totalRoughWeight"></el-input></el-col>
+              <el-col :span="3"> <span>总净重</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.totalNetWeight"></el-input></el-col>
+              <el-col :span="3"> <span>下单数量</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.orderCount"></el-input></el-col>
+            </el-row>
+            <el-row class="row_product">
+              <el-col :span="2"> <span>未下单数量</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.noOrderCount"></el-input></el-col>
+              <el-col :span="3"> <span>发货数量</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.sendCount"></el-input></el-col>
+              <el-col :span="3"> <span>未发货数量</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.unsentCount"></el-input></el-col>
+            </el-row>
+            <el-row style="text-align: right;">
+              <el-button type="primary" @click="cancelProduct">取消</el-button>
+              <el-button type="primary" @click="saveProduct">保存</el-button>
+            </el-row>
+          </el-form>
+        </el-row>
+      </el-dialog>
+    </el-main>
   </el-container>
 </template>
 
 <script>
-  import {queryOrderProduct,queryOrderDetail}  from '@/api/modules/order'
+  import {queryOrderProduct,queryOrderDetail,saveOrder,deleteOrderProducts}  from '@/api/modules/order'
   import Moment from 'moment'
 
   export default {
@@ -275,7 +281,7 @@
         value4: '',
         dateValue :'2018-03-25 09:29:24',
         activeNames: ['1','3','5'],
-        readOnly : true,
+        readOnly : false,
         costDetail:[{
           costName : '车辆损耗',
           price:'50',
@@ -287,8 +293,12 @@
         }],
         order:{},
         orderProduct:{},
-        checkedRows:[],
-
+        checkedRows:[]
+      }
+    },
+    computed:{
+      isTicket:function () {
+        return this.orderProduct.ticket ? '是':'否';
       }
     },
     created:function () {
@@ -297,45 +307,99 @@
       if(orderNumber){
         queryOrderDetail(orderNumber).then(res=>{
           this.order = res;
-          this.order.orderProducts = res.orderProductList;
+          // 为每条产品信息复制index下标，方便后期操作
+          if(this.order.orderProductList){
+           for(var i =0 ;i< this.order.orderProductList.length;i++){
+             this.order.orderProductList[i].index = i;
+            }
+          }
         })
       }
     },
     methods:{
       // 表格前面的选择复选框，选择后将选中的行放入临时数据集合中
       tableSelect:function(selected,row){
-        this.checkedRows.splice(0,this.checkedRows.length);
+        this.checkedRows.length = 0;
         for(var indx = 0 ; indx < selected.length;indx++){
           this.checkedRows.push(selected[indx]);
         }
       },
+      // 表格的类样式方法，本处用来存储每条数据的index
+      tableRowClassName({row, rowIndex}) {
+        row.index = rowIndex;
+      },
       // 时间日期格式转换
-      dateFormat:function(cellValue){
+      dateFormat:function(row, column, cellValue, index){
         // ("YYYY-MM-DD HH:mm:ss");
-        return Moment(cellValue).format("YYYY-MM-DD");
+        if(cellValue){
+          return Moment(cellValue).format("YYYY-MM-DD");
+        }else{
+          return "";
+        }
       },
       // 转换boolean类型为汉字
       convertBoolean:function(row, column, cellValue, index){
-        return cellValue ? '是':'否';
+        if(cellValue){
+          return cellValue ? '是':'否';
+        }else{
+          return "";
+        }
       },
       // 新增销售订单产品信息（打开模态框）
       addProduct:function(){
-
+        this.orderProduct.orderNumber = this.order.orderNumber;
         this.dialogVisible = true;
       },
       // 保存销售订单产品信息
       saveProduct:function(){
-        this.order.orderProducts.push(this.orderProduct);
+        // 没有index，则是新增数据
+        if(this.orderProduct.index == '' || this.orderProduct.index == undefined){
+          this.order.orderProductList.push(this.orderProduct);
+        }
+        // 有ID一般为修改
+        else{
+          this.order.orderProductList.splice(this.orderProduct.index,1);
+          this.order.orderProductList.splice(this.orderProduct.index,0,JSON.parse(JSON.stringify(this.orderProduct)));
+        }
         this.orderProduct = {};
         this.dialogVisible = false;
       },
+      // 编辑订单信息
+      editProduct:function () {
+        if(this.checkedRows.length != 1){
+          this.$message({
+            showClose: true,
+            message: '请选择一条数据',
+            type: 'warning'
+          });
+          return;
+        } else{
+          this.orderProduct = JSON.parse(JSON.stringify(this.checkedRows[0]));
+          this.dialogVisible = true;
+        }
+      },
+      // 复制销售订单信息
+      copyProduct:function () {
+        if(this.checkedRows.length != 1){
+          this.$message({
+            showClose: true,
+            message: '请选择一条数据',
+            type: 'warning'
+          });
+        }else{
+          this.orderProduct = JSON.parse(JSON.stringify(this.checkedRows[0]));
+          this.orderProduct.id = '';
+          this.dialogVisible = true;
+        }
+      },
       // 取消销售订单产品信息的编辑
       cancelProduct:function(){
-      this.$confirm('关闭后将不做任何操作，确认关闭？')
-        .then(_ => {
-          this.dialogVisible = false;
-        })
-        .catch(_ => {});
+        this.$confirm('关闭后将不做任何操作，确认关闭？')
+          .then(_ => {
+            this.dialogVisible = false;
+            this.orderProduct = {};
+          })
+          .catch(_ => {});
       },
       // 自带关闭销售订单窗口事件
       handleClose:function(done){
@@ -343,7 +407,6 @@
       },
       // 删除选中的元素
       delete_row:function() {
-        console.log(this.checkedRows.length);
         if(this.checkedRows.length <= 0){
           this.$message({
             showClose: true,
@@ -352,27 +415,51 @@
           });
           return;
         }
-        var needRemoveIndexArray = [];
-        if(this.checkedRows.length <= 0){
-          return ;
-        }
-        for(var i = 0; i< this.checkedRows.length;i++){
-          for(var j = 0 ; j< this.orderDetail.length;j++){
-            if(this.checkedRows[i].productCode == this.orderDetail[j].productCode){
-              needRemoveIndexArray.push(j);
+        // 给出确认删除的提示
+        else{
+          this.$confirm('此删除操作将即时生效, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            // 保存需要后台删除数据的Id集合
+            const idList = [];
+            // 先从页面上去除数据
+            for(var i = this.checkedRows.length -1 ; i>= 0;i--){
+              if(this.checkedRows[i].id){
+                idList.push(this.checkedRows[i].id);
+              }
+              if(this.checkedRows[i].index >= 0){
+                this.order.orderProductList.splice(this.checkedRows[i].index,1);
+              }
             }
+            this.checkedRows.splice(0,this.checkedRows.length);
+            // 调用后台删除数据
+            if(idList != null && idList.length > 0){
+              deleteOrderProducts(idList);
+            }
+            this.$message({
+              showClose: true,
+              message: '删除成功~',
+              type: 'success'
+            });
+          }).catch(() => {
+            return;
+          });
+        }
+      },
+      // 保存订单信息
+      saveOrder:function(){
+        saveOrder(this.order).then(res=>{
+          if(res.status == 0){
+            this.$message({
+              showClose: true,
+              message: '保存成功~',
+              type: 'success'
+            });
+            this.$router.push({name:'queryOrder'});
           }
-        }
-        needRemoveIndexArray. reverse();
-        for(var i = 0;i<needRemoveIndexArray.length;i++){
-          this.orderDetail.splice(needRemoveIndexArray[i],1);
-        }
-        this.checkedRows.splice(0,this.checkedRows.length);
-        this.$message({
-          showClose: true,
-          message: '删除成功~',
-          type: 'success'
-        });
+        })
       }
     }
   }

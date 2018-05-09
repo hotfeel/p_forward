@@ -4,7 +4,7 @@
       <el-row class="e_common e_row_header">
         <c-top-query style="float: left"></c-top-query>
         <el-button icon="el-icon-edit" class="btn_common" @click="toOrderDetail">新建</el-button>
-        <el-button icon="el-icon-delete" class="btn_common">删除</el-button>
+        <!--<el-button icon="el-icon-delete" class="btn_common">删除</el-button>-->
       </el-row>
     </el-header>
       <el-main style="height: 100%;">
@@ -26,7 +26,7 @@
                   width="90">
                   <template slot-scope="scope">
                     <a class="el-icon-search" title="详情查询" @click="queryOrderDetail(scope.$index, scope)"></a>
-                    <a class="el-icon-edit" title="编辑" @click="deleteRow(scope.$index, scope)"></a>
+                    <a class="el-icon-edit" title="编辑" @click="queryOrderDetail(scope.$index, scope)"></a>
                     <a class="el-icon-delete" title="删除" @click="deleteRow(scope.$index, scope)"></a>
                   </template>
                 </el-table-column>
@@ -146,7 +146,7 @@
   import Moment from 'moment'
   import CTopQuery from '@/components/m_common/topQuery'
   import ElFooter from "element-ui/packages/footer/src/main";
-  import { queryOrderList } from '@/api/modules/order'
+  import { queryOrderList,deleteOrder} from '@/api/modules/order'
 
   export  default {
     components:{
@@ -159,9 +159,13 @@
     methods:{
       // 删除某条数据
       deleteRow:function (index,row) {
-        console.log(index);
-        console.log(row);
-        console.log(row.row.orderNumber);
+        deleteOrder(row.row);
+        this.tableDate.splice(index,1);
+        this.$message({
+          showClose: true,
+          message: '删除成功~',
+          type: 'success'
+        });
       },
       // 查看订单详情
       queryOrderDetail:function(index,row){
@@ -169,7 +173,11 @@
       },
       dateFormat:function(row, column, cellValue, index){
         // ("YYYY-MM-DD HH:mm:ss");
-        return Moment(cellValue).format("YYYY-MM-DD");
+        if(cellValue){
+          return Moment(cellValue).format("YYYY-MM-DD");
+        }else{
+          return "";
+        }
       },
       toOrderDetail:function(){
         this.$router.push({name:'orderDetail'});

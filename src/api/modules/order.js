@@ -23,3 +23,26 @@ export const queryOrderDetail = (orderNumber) => {
   })
 }
 
+// 保存订单信息
+export const saveOrder = (order)=>{
+  return post({
+    url:'/order/saveOrder',
+    data:order
+  })
+}
+
+// 批量删除订单产品信息
+export const deleteOrderProducts = (idList)=>{
+  return post({
+    url:'/orderProduct/deleteOrderProducts',
+    data:idList
+  })
+}
+
+// 删除订单信息
+export const deleteOrder = (order)=>{
+  return post({
+    url:'/order/deleteOrder',
+    data:order
+  })
+}

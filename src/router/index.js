@@ -24,9 +24,13 @@ export default new Router({
       name: 'DepartManage',
       component: DepartManage
     },{
-      path: '/',
+      path: '/Demo3',
       name: 'Demo3',
       component: Demo3
+    },{
+      path: '/',
+      name: 'Demo',
+      component: Demo
     },{
       path: '/demo2',
       name: 'Demo2',
