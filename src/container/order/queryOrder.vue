@@ -14,7 +14,8 @@
                 style="width: 100%"
                 height="94%"
                 stripe
-                border>
+                border
+                @cell-dblclick="cellDblclick">
                 <el-table-column
                   fixed
                   type="selection"
@@ -166,6 +167,11 @@
           message: '删除成功~',
           type: 'success'
         });
+      },
+      cellDblclick:function(row, column, cell, event){
+        const row2 = {};
+        row2.row = row;
+        this.queryOrderDetail(0,row2);
       },
       // 查看订单详情
       queryOrderDetail:function(index,row){
