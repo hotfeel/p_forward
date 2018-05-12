@@ -2,6 +2,7 @@
   <el-container class="d_orderDetail">
     <el-header style="height: 50px;">
       <el-row class="e_row_header e_common">
+        <el-button icon="el-icon-back" class="btn_common" @click="backToOrder">返回</el-button>
         <el-button icon="iconfont icon-baocun" class="btn_common" @click="saveOrder">保存</el-button>
       </el-row>
     </el-header>
@@ -54,23 +55,12 @@
               <el-button icon="iconfont icon-xinzeng" class="btn_fun" @click="addProduct">新建</el-button>
               <el-button icon="iconfont icon-xinzeng" class="btn_fun"  @click="copyProduct">复制</el-button>
               <el-button icon="el-icon-edit" class="btn_fun"  @click="editProduct">编辑</el-button>
-              <el-button icon="el-icon-delete" class="btn_fun" @click="delete_row">删除</el-button>
+              <el-button icon="el-icon-delete" class="btn_fun" @click="deleteRowProduct">删除</el-button>
             </div>
-            <el-table
-              :data="order.orderProductList"
-              border
-              style="width: 100%" ref="productTable"
-              @select="tableSelect"
-              :row-class-name="tableRowClassName">
-              <el-table-column
-                fixed
-                type="selection"
-                width="35">
-              </el-table-column>
-              <el-table-column
-                type="index"
-                v-if="false">
-              </el-table-column>
+            <el-table :data="order.orderProductList" border style="width: 100%" ref="productTable"
+                      @select="tableSelectProduct" :row-class-name="tableRowClassName">
+              <el-table-column fixed type="selection" width="35"></el-table-column>
+              <el-table-column type="index" v-if="false"></el-table-column>
               <el-table-column prop="id" width="0" v-if="false" label="id"/>
               <el-table-column prop="orderNumber" width="150" label="订单编号"/>
               <el-table-column prop="name" fixed  width="150" label="中文名称"/>
@@ -109,86 +99,38 @@
             </el-table>
           </el-collapse-item>
           <el-collapse-item title="费用明细" name="4">
-            <el-table
-              :data="costDetail"
-              border
-              style="width: 100%">
-              <el-table-column
-                prop="costName"
-                label="费用名称"
-                width="120">
-              </el-table-column>
-              <el-table-column
-                prop="price"
-                label="金额"
-                width="120">
-              </el-table-column>
-              <el-table-column
-                prop="descript"
-                label="备注">
-              </el-table-column>
+            <div class="div_product">
+              <el-button icon="iconfont icon-xinzeng" class="btn_fun" @click="addCharge">新建</el-button>
+              <el-button icon="iconfont icon-xinzeng" class="btn_fun"  @click="copyCharge">复制</el-button>
+              <el-button icon="el-icon-edit" class="btn_fun"  @click="editCharge">编辑</el-button>
+              <el-button icon="el-icon-delete" class="btn_fun" @click="deleteRowCharge">删除</el-button>
+            </div>
+            <el-table :data="order.orderChargeList" border style="width: 100%" @select="tableSelectCharge" :row-class-name="tableRowClassName">
+              <el-table-column fixed type="selection" width="35"></el-table-column>
+              <el-table-column prop="chargeName" label="费用名称" width="120"></el-table-column>
+              <el-table-column prop="chargeMoney" label="金额" width="120"></el-table-column>
+              <el-table-column prop="description" label="备注"> </el-table-column>
             </el-table>
           </el-collapse-item>
           <el-collapse-item title="合计信息" name="5">
             <el-row class="total_el">
-              <el-col :span="1" class="col_span">
-                <label>总货值(元)</label>
-              </el-col>
-              <el-col :span="4">
-                <el-input :readonly = "readOnly">
-                </el-input>
-              </el-col>
-              <el-col :span="1" class="col_span d_t_span">
-                <label>总数量</label>
-              </el-col>
-              <el-col :span="4">
-                <el-input :readonly = "readOnly">
-                </el-input>
-              </el-col>
-              <el-col :span="1" class="col_span d_t_span">
-                <label>总箱数</label>
-              </el-col>
-              <el-col :span="4">
-                <el-input :readonly = "readOnly">
-                </el-input>
-              </el-col>
-              <el-col :span="1" class="col_span">
-                <label>总毛重(kg)</label>
-              </el-col>
-              <el-col :span="4">
-                <el-input :readonly = "readOnly">
-                </el-input>
-              </el-col>
+              <el-col :span="1" class="col_span"><label>总货值(元)</label></el-col><el-col :span="4"><el-input :readonly = "readOnly"/></el-col>
+              <el-col :span="1" class="col_span d_t_span"><label>总数量</label></el-col>
+              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
+              <el-col :span="1" class="col_span d_t_span"><label>总箱数</label></el-col>
+              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
+              <el-col :span="1" class="col_span"><label>总毛重(kg)</label></el-col>
+              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
             </el-row>
             <el-row>
-              <el-col :span="1" class="col_span">
-                <label>总净重(kg)</label>
-              </el-col>
-              <el-col :span="4">
-                <el-input :readonly = "readOnly">
-                </el-input>
-              </el-col>
-              <el-col :span="1" class="col_span d_t_span">
-                <label>总体积(立方)</label>
-              </el-col>
-              <el-col :span="4">
-                <el-input :readonly = "readOnly">
-                </el-input>
-              </el-col>
-              <el-col :span="1" class="col_span d_t_span">
-                <label>费用合计(元)</label>
-              </el-col>
-              <el-col :span="4">
-                <el-input :readonly = "readOnly">
-                </el-input>
-              </el-col>
-              <el-col :span="1" class="col_span">
-                <label>总金额(元)</label>
-              </el-col>
-              <el-col :span="4">
-                <el-input :readonly = "readOnly">
-                </el-input>
-              </el-col>
+              <el-col :span="1" class="col_span"><label>总净重(kg)</label></el-col>
+              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
+              <el-col :span="1" class="col_span d_t_span"><label>总体积(立方)</label></el-col>
+              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
+              <el-col :span="1" class="col_span d_t_span"><label>费用合计(元)</label></el-col>
+              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
+              <el-col :span="1" class="col_span"><label>总金额(元)</label></el-col>
+              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
             </el-row>
           </el-collapse-item>
         </el-collapse>
@@ -196,7 +138,7 @@
       <!--新增产品订单信息-->
       <el-dialog
         title="产品信息"
-        :visible.sync="dialogVisible"
+        :visible.sync="product_dialogVisible"
         width="70%"
         center
         :before-close="handleClose" class="dialog_product">
@@ -263,12 +205,39 @@
           </el-form>
         </el-row>
       </el-dialog>
+
+      <!--新增费用明细信息-->
+      <el-dialog
+        title="费用信息"
+        :visible.sync="charge_dialogVisible"
+        width="70%"
+        center
+        :before-close="handleClose" class="dialog_product">
+        <el-row class="row_pro_content">
+          <el-form ref="form" :model="form">
+            <el-row> <!-- v-if="false">-->
+              <el-col :span="0"><span>ID</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.id"></el-input></el-col>
+              <el-col :span="0"><span>orderNumber</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.orderNumber"></el-input></el-col>
+              <el-col :span="0"><span>index</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.index"></el-input></el-col>
+            </el-row>
+            <el-row class="row_product">
+              <el-col :span="2"><span>费用名称</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.chargeName"></el-input></el-col>
+              <el-col :span="3"><span>金额</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.chargeMoney"></el-input> </el-col>
+              <el-col :span="3"><span>描述</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.description"></el-input> </el-col>
+            </el-row>
+            <el-row style="text-align: right;">
+              <el-button type="primary" @click="cancelCharge">取消</el-button>
+              <el-button type="primary" @click="saveCharge">保存</el-button>
+            </el-row>
+          </el-form>
+        </el-row>
+      </el-dialog>
     </el-main>
   </el-container>
 </template>
 
 <script>
-  import {queryOrderProduct,queryOrderDetail,saveOrder,deleteOrderProducts}  from '@/api/modules/order'
+  import {queryOrderDetail,saveOrder,deleteOrderProducts,deleteOrderCharges}  from '@/api/modules/order'
   import Moment from 'moment'
 
   export default {
@@ -277,23 +246,17 @@
         form:{
           name:""
         },
-        dialogVisible : false,
+        product_dialogVisible : false,
+        charge_dialogVisible:false,
         value4: '',
         dateValue :'2018-03-25 09:29:24',
         activeNames: ['1','3','5'],
         readOnly : false,
-        costDetail:[{
-          costName : '车辆损耗',
-          price:'50',
-          descript:'有发票'
-        },{
-          costName : '其它',
-          price:'460',
-          descript:'请人搬货进仓库'
-        }],
         order:{},
         orderProduct:{},
-        checkedRows:[]
+        orderCharge:{},
+        checkedRowsProduct:[],
+        checkedRowsCharge:[]
       }
     },
     computed:{
@@ -309,23 +272,22 @@
           this.order = res;
           // 为每条产品信息复制index下标，方便后期操作
           if(this.order.orderProductList){
-           for(var i =0 ;i< this.order.orderProductList.length;i++){
-             this.order.orderProductList[i].index = i;
+            for(var i =0 ;i< this.order.orderProductList.length;i++){
+              this.order.orderProductList[i].index = i;
+            }
+          }
+          // 为每条订单费用信息复制Index下标，方便后期操作
+          if(this.order.orderChargeList){
+            for(var i =0 ;i<this.order.orderChargeList.length;i++){
+              this.order.orderChargeList[i].index = i;
             }
           }
         })
       }
     },
     methods:{
-      // 表格前面的选择复选框，选择后将选中的行放入临时数据集合中
-      tableSelect:function(selected,row){
-        this.checkedRows.length = 0;
-        for(var indx = 0 ; indx < selected.length;indx++){
-          this.checkedRows.push(selected[indx]);
-        }
-      },
       // 表格的类样式方法，本处用来存储每条数据的index
-      tableRowClassName({row, rowIndex}) {
+      tableRowClassName({row, rowIndex}){
         row.index = rowIndex;
       },
       // 时间日期格式转换
@@ -345,10 +307,21 @@
           return "";
         }
       },
+      // 返回上一页
+      backToOrder:function(){
+        this.$router.push({name:'queryOrder'});
+      },
+      // 订单产品表格前面的选择复选框，选择后将选中的行放入临时数据集合中
+      tableSelectProduct:function(selected,row){
+        this.checkedRowsProduct.length = 0;
+        for(var indx = 0 ; indx < selected.length;indx++){
+          this.checkedRowsProduct.push(selected[indx]);
+        }
+      },
       // 新增销售订单产品信息（打开模态框）
       addProduct:function(){
         this.orderProduct.orderNumber = this.order.orderNumber;
-        this.dialogVisible = true;
+        this.product_dialogVisible = true;
       },
       // 保存销售订单产品信息
       saveProduct:function(){
@@ -358,15 +331,16 @@
         }
         // 有ID一般为修改
         else{
+          this.order.orderProductList.index = this.order.orderProductList.length;
           this.order.orderProductList.splice(this.orderProduct.index,1);
           this.order.orderProductList.splice(this.orderProduct.index,0,JSON.parse(JSON.stringify(this.orderProduct)));
         }
         this.orderProduct = {};
-        this.dialogVisible = false;
+        this.product_dialogVisible = false;
       },
-      // 编辑订单信息
+      // 编辑订单产品信息
       editProduct:function () {
-        if(this.checkedRows.length != 1){
+        if(this.checkedRowsProduct.length != 1){
           this.$message({
             showClose: true,
             message: '请选择一条数据',
@@ -374,29 +348,30 @@
           });
           return;
         } else{
-          this.orderProduct = JSON.parse(JSON.stringify(this.checkedRows[0]));
-          this.dialogVisible = true;
+          this.orderProduct = JSON.parse(JSON.stringify(this.checkedRowsProduct[0]));
+          this.product_dialogVisible = true;
         }
       },
-      // 复制销售订单信息
+      // 复制销售订单产品信息
       copyProduct:function () {
-        if(this.checkedRows.length != 1){
+        if(this.checkedRowsProduct.length != 1){
           this.$message({
             showClose: true,
             message: '请选择一条数据',
             type: 'warning'
           });
         }else{
-          this.orderProduct = JSON.parse(JSON.stringify(this.checkedRows[0]));
+          this.orderProduct = JSON.parse(JSON.stringify(this.checkedRowsProduct[0]));
           this.orderProduct.id = '';
-          this.dialogVisible = true;
+          this.orderProduct.index = '';
+          this.product_dialogVisible = true;
         }
       },
       // 取消销售订单产品信息的编辑
       cancelProduct:function(){
         this.$confirm('关闭后将不做任何操作，确认关闭？')
           .then(_ => {
-            this.dialogVisible = false;
+            this.product_dialogVisible = false;
             this.orderProduct = {};
           })
           .catch(_ => {});
@@ -406,8 +381,8 @@
 
       },
       // 删除选中的元素
-      delete_row:function() {
-        if(this.checkedRows.length <= 0){
+      deleteRowProduct:function() {
+        if(this.checkedRowsProduct.length <= 0){
           this.$message({
             showClose: true,
             message: '请至少选择一条数据',
@@ -425,15 +400,15 @@
             // 保存需要后台删除数据的Id集合
             const idList = [];
             // 先从页面上去除数据
-            for(var i = this.checkedRows.length -1 ; i>= 0;i--){
-              if(this.checkedRows[i].id){
-                idList.push(this.checkedRows[i].id);
+            for(var i = this.checkedRowsProduct.length -1 ; i>= 0;i--){
+              if(this.checkedRowsProduct[i].id){
+                idList.push(this.checkedRowsProduct[i].id);
               }
-              if(this.checkedRows[i].index >= 0){
-                this.order.orderProductList.splice(this.checkedRows[i].index,1);
+              if(this.checkedRowsProduct[i].index >= 0){
+                this.order.orderProductList.splice(this.checkedRowsProduct[i].index,1);
               }
             }
-            this.checkedRows.splice(0,this.checkedRows.length);
+            this.checkedRowsProduct.splice(0,this.checkedRowsProduct.length);
             // 调用后台删除数据
             if(idList != null && idList.length > 0){
               deleteOrderProducts(idList);
@@ -448,7 +423,129 @@
           });
         }
       },
-      // 保存订单信息
+
+      // 订单费用表格前面的选择复选框，
+      tableSelectCharge:function (selected,row){
+        this.checkedRowsCharge.length = 0;
+        for(var indx = 0 ; indx < selected.length;indx++){
+          this.checkedRowsCharge.push(selected[indx]);
+        }
+      },
+      // 订单费用表格前面的选择复选框，选择后将选中的行放入临时数据集合中
+      tableSelectCharge:function(selected,row){
+        this.checkedRowsCharge.length = 0;
+        for(var indx = 0 ; indx < selected.length;indx++){
+          this.checkedRowsCharge.push(selected[indx]);
+        }
+      },
+      // 新增销售订单费用信息（打开模态框）
+      addCharge:function(){
+        this.orderCharge.orderNumber = this.order.orderNumber;
+        this.charge_dialogVisible = true;
+      },
+      // 保存销售订单费用信息
+      saveCharge:function(){
+        console.log("保存销售订单费用");
+        console.log(this.orderCharge);
+     // 没有index，则是新增数据
+        if(this.orderCharge.index == '' || this.orderCharge.index == undefined){
+          this.orderCharge.index = this.order.orderChargeList.length;
+          this.order.orderChargeList.push(this.orderCharge);
+        }
+          // 有index一般为修改
+        else{
+          this.order.orderChargeList.splice(this.orderCharge.index,1);
+          this.order.orderChargeList.splice(this.orderCharge.index,0,JSON.parse(JSON.stringify(this.orderCharge)));
+        }
+        this.orderCharge = {};
+        this.charge_dialogVisible = false;
+      },
+      // 编辑订单费用信息
+      editCharge:function () {
+        if(this.checkedRowsCharge.length != 1){
+          this.$message({
+            showClose: true,
+            message: '请选择一条数据',
+            type: 'warning'
+          });
+          return;
+        } else{
+          this.orderCharge = JSON.parse(JSON.stringify(this.checkedRowsCharge[0]));
+          this.charge_dialogVisible = true;
+        }
+      },
+      // 复制销售订单费用信息
+      copyCharge:function () {
+        if(this.checkedRowsCharge.length != 1){
+          this.$message({
+            showClose: true,
+            message: '请选择一条数据',
+            type: 'warning'
+          });
+        }else{
+          this.orderCharge = JSON.parse(JSON.stringify(this.checkedRowsCharge[0]));
+          this.orderCharge.id = '';
+          this.orderCharge.index = '';
+          this.charge_dialogVisible = true;
+        }
+      },
+      // 取消销售订单费用信息的编辑
+      cancelCharge:function(){
+        this.$confirm('关闭后将不做任何操作，确认关闭？')
+          .then(_ => {
+            this.charge_dialogVisible = false;
+            this.orderCharge = {};
+          })
+          .catch(_ => {});
+      },
+      // 自带关闭销售订单窗口事件
+      handleClose:function(done){
+
+      },
+      // 删除选中的元素
+      deleteRowCharge:function() {
+        if(this.checkedRowsCharge.length <= 0){
+          this.$message({
+            showClose: true,
+            message: '请至少选择一条数据',
+            type: 'warning'
+          });
+          return;
+        }
+        // 给出确认删除的提示
+        else{
+          this.$confirm('此删除操作将即时生效, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            // 保存需要后台删除数据的Id集合
+            const idList = [];
+            // 先从页面上去除数据
+            for(var i = this.checkedRowsCharge.length -1 ; i>= 0;i--){
+              if(this.checkedRowsCharge[i].id){
+                idList.push(this.checkedRowsCharge[i].id);
+              }
+              if(this.checkedRowsCharge[i].index >= 0){
+                this.order.orderChargeList.splice(this.checkedRowsCharge[i].index,1);
+              }
+            }
+            this.checkedRowsCharge.splice(0,this.checkedRowsCharge.length);
+            // 调用后台删除数据
+            if(idList != null && idList.length > 0){
+              deleteOrderCharges(idList);
+            }
+            this.$message({
+              showClose: true,
+              message: '删除成功~',
+              type: 'success'
+            });
+          }).catch(() => {
+            return;
+          });
+        }
+      },
+      // 保存订单产品信息
       saveOrder:function(){
         saveOrder(this.order).then(res=>{
           if(res.status == 0){
@@ -461,6 +558,61 @@
           }
         })
       }
+
+
+
+
+
+
+
+      /*// 新增费用信息(按钮)
+      addCharge:function () {
+        this.orderCharge.orderNumber = this.order.orderNumber;
+        this.charge_dialogVisible =true;
+      },
+      // 复制订单费用信息(按钮)
+      copyCharge:function () {
+        if(this.checkedRowsCharge.length != 1){
+          this.$message({
+            showClose: true,
+            message: '请选择一条数据',
+            type: 'warning'
+          });
+        }else{
+          this.orderCharge = JSON.parse(JSON.stringify(this.checkedRowsCharge[0]));
+          this.orderCharge.id = '';
+          this.product_dialogVisible = true;
+        }
+      },
+      // 关闭费用信息模态框
+      cancelCharge:function () {
+        this.$confirm('关闭后将不做任何操作，确认关闭？')
+          .then(_ => {
+            this.charge_dialogVisible = false;
+            this.orderCharge = {};
+          })
+          .catch(_ => {});
+      },
+      // 保存费用信息
+      saveCharge:function () {
+        // 存在ID则是修改
+        if(this.orderCharge.id){
+
+        }
+        // 不存在ID则是新增
+        else{
+          addCharge(this.orderCharge).then(res=>{
+            this.$message({
+              showClose: true,
+              message: '保存成功~',
+              type: 'success'
+            });
+            this.charge_dialogVisible = false;
+            this.order.orderChargeList.push(this.orderCharge);
+            this.orderCharge = {};
+          })
+        }
+      }*/
     }
   }
 </script>

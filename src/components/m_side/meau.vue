@@ -14,6 +14,32 @@
           <i class="iconfont icon-shouye"></i>
           <span slot="title">首页</span>
         </el-menu-item>
+        <el-submenu index="2-2">
+          <template slot="title">
+            <i class="iconfont icon-yewu"></i>
+            <span>基础资料</span>
+          </template>
+          <el-menu-item index="/1-1-1">
+            <i class="el-icon-arrow-right"></i>
+            <span slot="title">产品档案</span>
+          </el-menu-item>
+          <el-menu-item index="/1-1-7">
+            <i class="el-icon-arrow-right"></i>
+            <span slot="title">客户档案</span>
+          </el-menu-item>
+          <el-menu-item index="1-1-2">
+            <i class="el-icon-arrow-right"></i>
+            <span slot="title">供应商档案</span>
+          </el-menu-item>
+          <el-menu-item index="1-1-3">
+            <i class="el-icon-arrow-right"></i>
+            <span slot="title">物流公司</span>
+          </el-menu-item>
+          <el-menu-item index="1-1-5">
+            <i class="el-icon-arrow-right"></i>
+            <span slot="title">仓库信息</span>
+          </el-menu-item>
+        </el-submenu>
         <el-submenu index="2">
           <template slot="title">
             <i class="iconfont icon-yewu"></i>
