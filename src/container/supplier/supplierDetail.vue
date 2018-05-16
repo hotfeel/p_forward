@@ -11,46 +11,44 @@
         <el-collapse v-model="activeNames">
           <el-collapse-item title="主要信息" name="1">
             <el-row>
-              <el-col :span="1" class="col_span">  <label>销售订单号</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.orderNumber">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>合同日期</label></el-col><el-col :span="4">  <el-date-picker :readonly = "readOnly"  v-model="order.constractDate" type="date"/></el-col>
-              <el-col :span="1" class="col_span">  <label>客户编号</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.custNumber">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>客户简称</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.custShortName">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>供应商编号</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.orderNumber">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>供应商简称</label></el-col><el-col :span="4">  <el-input  :readonly = "readOnly"  v-model="order.constractDate"/></el-col>
+              <el-col :span="1" class="col_span">  <label>供应商名称</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.custNumber">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>省份</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.custShortName">  </el-input></el-col>
             </el-row>
             <el-row>
-              <el-col :span="1" class="col_span">  <label>客户订单号</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.custOrderNumber">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>交货日期</label></el-col><el-col :span="4">  <el-date-picker :readonly = "readOnly"  v-model="order.deliveryDate" type="date"/></el-col>
-              <el-col :span="1" class="col_span">  <label>我方公司</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.ownCompany">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>币种</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.currency">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>城市</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.custOrderNumber">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>网址</label></el-col><el-col :span="4">  <el-input  :readonly = "readOnly"  v-model="order.deliveryDate"/></el-col>
+              <el-col :span="1" class="col_span">  <label>地址</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.ownCompany">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>邮编</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.currency">  </el-input></el-col>
             </el-row>
             <el-row>
-              <el-col :span="1" class="col_span">  <label>汇率</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.exchargeRate">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>保险比率</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.insuranceRatio">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>佣金比率</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly"  v-model="order.commissionRatio">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>业务员</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.courier">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>经营业务</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.exchargeRate">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>合作等级</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.insuranceRatio">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>能否开票</label></el-col><el-col :span="4">  <el-checkbox v-model="order.isCanTicket" ></el-checkbox></el-col>
+              <el-col :span="1" class="col_span">  <label>开户银行</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.courier">  </el-input></el-col>
             </el-row>
             <el-row>
-              <el-col :span="1" class="col_span">  <label>制单日期</label></el-col><el-col :span="4">  <el-date-picker :readonly = "readOnly"  v-model="order.createDate" type="date"/></el-col>
-              <el-col :span="1" class="col_span">  <label>制单人</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.creator">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>开户行地址</label></el-col><el-col :span="4">  <el-input  :readonly = "readOnly"  v-model="order.paymentWay"/></el-col>
+              <el-col :span="1" class="col_span">  <label>银行账号</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.creator">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>公司税号</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly"  v-model="order.createDate"/></el-col>
+              <el-col :span="1" class="col_span">  <label>法人代表</label></el-col><el-col :span="4">  <el-input  :readonly = "readOnly"  v-model="order.paymentWay"/></el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="1" class="col_span">  <label>注册资金</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.creator">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>设立时间</label></el-col><el-col :span="4">  <el-date-picker :readonly = "readOnly"  v-model="order.createDate" type="date"/></el-col>
+              <el-col :span="1" class="col_span">  <label>年销售额</label></el-col><el-col :span="4">  <el-input  :readonly = "readOnly"  v-model="order.paymentWay"/></el-col>
+              <el-col :span="1" class="col_span">  <label>代表客户</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.creator">  </el-input></el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="1" class="col_span">  <label>采购员</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.creator">  </el-input></el-col>
+              <el-col :span="1" class="col_span">  <label>建档时间</label></el-col><el-col :span="4">  <el-date-picker :readonly = "readOnly"  v-model="order.createDate" type="date"/></el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="1" class="col_span"><label>质量证书</label></el-col><el-col :span="22"><el-input type="textarea" :rows="2" :readonly = "readOnly" v-model="order.descp">  </el-input></el-col>
             </el-row>
           </el-collapse-item>
-          <el-collapse-item title="辅助信息" name="2">
-            <el-row>
-              <el-col :span="1" class="col_span">  <label>付款方式</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.paymentWay"></el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>签约地点</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.contractAddress">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>运输方式</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.transWay">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>交货地点</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.deliveryAddress">  </el-input></el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="1" class="col_span">  <label>费用承担</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.chargeBear">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>包装要求</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.bagRequire">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>品质保证</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.qualityAss">  </el-input></el-col>
-              <el-col :span="1" class="col_span">  <label>违约责任</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.liability">  </el-input></el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="1" class="col_span">  <label>合同纠纷</label></el-col><el-col :span="4">  <el-input :readonly = "readOnly" v-model="order.contractDispute">  </el-input></el-col>
-            </el-row>
-          </el-collapse-item>
-          <el-collapse-item title="订单产品明细" name="3">
+          <el-collapse-item title="联系人信息" name="3">
             <div class="div_product">
               <el-button icon="iconfont icon-xinzeng" class="btn_fun" @click="addProduct">新建</el-button>
               <el-button icon="iconfont icon-xinzeng" class="btn_fun"  @click="copyProduct">复制</el-button>
@@ -62,43 +60,23 @@
               <el-table-column fixed type="selection" width="35"></el-table-column>
               <el-table-column type="index" v-if="false"></el-table-column>
               <el-table-column prop="id" width="0" v-if="false" label="id"/>
-              <el-table-column prop="orderNumber" width="150" label="订单编号"/>
-              <el-table-column prop="name" fixed  width="150" label="中文名称"/>
-              <el-table-column prop="code" width="150" label="产品编码"/>
-              <el-table-column prop="barCode"  width="150" label="条形码"/>
-              <el-table-column prop="productImg"  width="150" label="产品图片"/>
-              <el-table-column prop="enName"  width="150" label="英文名称"/>
-              <el-table-column prop="model"  width="150" label="型号规格"/>
-              <el-table-column prop="description"  width="150" label="产品描述"/>
-              <el-table-column prop="brand"  width="150" label="品牌"/>
-              <el-table-column prop="netWeight"  width="150" label="净重"/>
-              <el-table-column prop="roughWeight"  width="150" label="毛重"/>
-              <el-table-column prop="unit"  width="150" label="单位"/>
-              <el-table-column prop="size"  width="150" label="产品尺寸"/>
-              <el-table-column prop="outBoxWeight"  width="150" label="外箱重量"/>
-              <el-table-column prop="outBoxWidth"  width="150" label="外箱宽度"/>
-              <el-table-column prop="outBoxVolume"  width="150" label="外箱体积"/>
-              <el-table-column prop="freightNum"  width="150" label="客户货号"/>
-              <el-table-column prop="packageMethod"  width="150" label="包装方式"/>
-              <el-table-column prop="deliveryDate"  width="150" :formatter="dateFormat" label="交货日期"/>
-              <el-table-column prop="ticket"  width="150" :formatter="convertBoolean" label="是否开票"/>
-              <el-table-column prop="dealCount"  width="150" label="合同数量"/>
-              <el-table-column prop="salePrice"  width="150" label="销售单价"/>
-              <el-table-column prop="saleTotal"  width="150" label="销售总价"/>
-              <el-table-column prop="supplierNum"  width="150" label="默认供应商编号"/>
-              <el-table-column prop="purchasePrice"  width="150" label="默认采购单价"/>
-              <el-table-column prop="purchaseTotalPrice"  width="150" label="默认采购总监"/>
-              <el-table-column prop="totalBox"  width="150" label="总箱数"/>
-              <el-table-column prop="totalVolume"  width="150" label="总体积"/>
-              <el-table-column prop="totalRoughWeight"  width="150" label="总毛总"/>
-              <el-table-column prop="totalNetWeight"  width="150" label="总净重"/>
-              <el-table-column prop="orderCount"  width="150" label="下单数量"/>
-              <el-table-column prop="noOrderCount"  width="150" label="未下单数"/>
-              <el-table-column prop="sendCount"  width="150" label="发货数量"/>
-              <el-table-column prop="unsentCount"  width="150" label="未发货数量"/>
+              <el-table-column prop="orderNumber" width="150" label="姓名"/>
+              <el-table-column prop="name" fixed  width="150" label="部门"/>
+              <el-table-column prop="code" width="150" label="性别"/>
+              <el-table-column prop="barCode"  width="150" label="职务"/>
+              <el-table-column prop="productImg"  width="150" label="生日"/>
+              <el-table-column prop="enName"  width="150" label="电话号码"/>
+              <el-table-column prop="model"  width="150" label="手机号码"/>
+              <el-table-column prop="description"  width="150" label="传真号码"/>
+              <el-table-column prop="brand"  width="150" label="邮箱"/>
+              <el-table-column prop="netWeight"  width="150" label="微信"/>
+              <el-table-column prop="roughWeight"  width="150" label="QQ"/>
+              <el-table-column prop="unit"  width="150" label="饮食习惯"/>
+              <el-table-column prop="size"  width="150" label="宗教信仰"/>
+              <el-table-column prop="outBoxWeight"  width="150" label="兴趣爱好"/>
             </el-table>
           </el-collapse-item>
-          <el-collapse-item title="费用明细" name="4">
+          <el-collapse-item title="出差路线" name="4">
             <div class="div_product">
               <el-button icon="iconfont icon-xinzeng" class="btn_fun" @click="addCharge">新建</el-button>
               <el-button icon="iconfont icon-xinzeng" class="btn_fun"  @click="copyCharge">复制</el-button>
@@ -107,37 +85,25 @@
             </div>
             <el-table :data="order.orderChargeList" border style="width: 100%" @select="tableSelectCharge" :row-class-name="tableRowClassName">
               <el-table-column fixed type="selection" width="35"></el-table-column>
-              <el-table-column prop="chargeName" label="费用名称" width="120"></el-table-column>
-              <el-table-column prop="chargeMoney" label="金额" width="120"></el-table-column>
+              <el-table-column prop="chargeName" label="出发地" width="120"></el-table-column>
+              <el-table-column prop="chargeMoney" label="目的地" width="120"></el-table-column>
+              <el-table-column prop="description" label="交通工具" width="120"> </el-table-column>
+              <el-table-column prop="description" label="用时" width="120"> </el-table-column>
+              <el-table-column prop="description" label="车费" width="120"> </el-table-column>
+              <el-table-column prop="description" label="住宿地" width="120"> </el-table-column>
               <el-table-column prop="description" label="备注"> </el-table-column>
             </el-table>
           </el-collapse-item>
-          <el-collapse-item title="合计信息" name="5">
+          <el-collapse-item title="备注" name="5">
             <el-row class="total_el">
-              <el-col :span="1" class="col_span"><label>总货值(元)</label></el-col><el-col :span="4"><el-input :readonly = "readOnly"/></el-col>
-              <el-col :span="1" class="col_span d_t_span"><label>总数量</label></el-col>
-              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
-              <el-col :span="1" class="col_span d_t_span"><label>总箱数</label></el-col>
-              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
-              <el-col :span="1" class="col_span"><label>总毛重(kg)</label></el-col>
-              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="1" class="col_span"><label>总净重(kg)</label></el-col>
-              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
-              <el-col :span="1" class="col_span d_t_span"><label>总体积(立方)</label></el-col>
-              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
-              <el-col :span="1" class="col_span d_t_span"><label>费用合计(元)</label></el-col>
-              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
-              <el-col :span="1" class="col_span"><label>总金额(元)</label></el-col>
-              <el-col :span="4"><el-input :readonly = "readOnly"></el-input></el-col>
+              <el-input type="textarea" :rows="2" :readonly = "readOnly" v-model="order.description">  </el-input>
             </el-row>
           </el-collapse-item>
         </el-collapse>
       </el-row>
       <!--新增产品订单信息-->
       <el-dialog
-        title="产品信息"
+        title="联系人信息"
         :visible.sync="product_dialogVisible"
         width="70%"
         center
@@ -150,53 +116,28 @@
               <el-col :span="0"><span>index</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.index"></el-input></el-col>
             </el-row>
             <el-row class="row_product">
-              <el-col :span="2"><span>中文名称</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.name"></el-input></el-col>
-              <el-col :span="3"><span>英文名称</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.enName"></el-input> </el-col>
-              <el-col :span="3"><span>产品编码</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.code"></el-input> </el-col>
+              <el-col :span="2"><span>部门</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.name"></el-input></el-col>
+              <el-col :span="3"><span>姓名</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.enName"></el-input> </el-col>
+              <el-col :span="3"><span>性别</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.code"></el-input> </el-col>
             </el-row>
             <el-row class="row_product">
-              <el-col :span="2"><span>型号规格</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.model"></el-input> </el-col>
-              <el-col :span="3"><span>产品描述</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.description"></el-input> </el-col>
-              <el-col :span="3"><span>品牌</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.brand"></el-input> </el-col>
+              <el-col :span="2"><span>职务</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.model"></el-input> </el-col>
+              <el-col :span="3"><span>生日</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.description"></el-input> </el-col>
+              <el-col :span="3"><span>电话号码</span> </el-col> <el-col :span="5"><el-input v-model="orderProduct.brand"></el-input> </el-col>
             </el-row>
             <el-row class="row_product">
-              <el-col :span="2"> <span>净重</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.netWeight"></el-input></el-col>
-              <el-col :span="3"> <span>毛重</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.roughWeight"></el-input></el-col>
-              <el-col :span="3"> <span>单位</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.unit"></el-input></el-col>
+              <el-col :span="2"> <span>手机号码</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.netWeight"></el-input></el-col>
+              <el-col :span="3"> <span>传真号码</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.roughWeight"></el-input></el-col>
+              <el-col :span="3"> <span>邮箱</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.unit"></el-input></el-col>
             </el-row><el-row class="row_product">
-            <el-col :span="2"> <span>产品尺寸</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.size"></el-input></el-col>
-            <el-col :span="3"><span>外箱重量</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.outBoxWeight"></el-input></el-col>
-            <el-col :span="3"> <span>外箱宽度</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.outBoxWidth"></el-input></el-col>
+            <el-col :span="2"> <span>微信</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.size"></el-input></el-col>
+            <el-col :span="3"><span>QQ</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.outBoxWeight"></el-input></el-col>
+            <el-col :span="3"> <span>饮食习惯</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.outBoxWidth"></el-input></el-col>
           </el-row>
             <el-row class="row_product">
-              <el-col :span="2"> <span>外箱体积</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.outBoxVolume"></el-input></el-col>
-              <el-col :span="3"> <span>客户货号</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.freightNum"></el-input></el-col>
-              <el-col :span="3"> <span>包装方式</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.packageMethod"></el-input></el-col>
-            </el-row>
-            <el-row class="row_product">
-              <el-col :span="2"> <span>交货日期</span></el-col><el-col :span="5"> <el-date-picker v-model="orderProduct.deliveryDate" type="date"/></el-col>
-              <el-col :span="3"> <span>是否开票</span></el-col><el-col :span="5"> <el-select v-model="orderProduct.ticket"><el-option label="是" :value="true"></el-option><el-option label="否" :value="false"></el-option></el-select></el-col>
-              <el-col :span="3"> <span>合同数量</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.dealCount"></el-input></el-col>
-            </el-row>
-            <el-row class="row_product">
-              <el-col :span="2"> <span>销售单价</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.salePrice"></el-input></el-col>
-              <el-col :span="3"> <span>供应商编号</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.supplierNum"></el-input></el-col>
-              <el-col :span="3"> <span>采购单价</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.purchasePrice"></el-input></el-col>
-            </el-row>
-            <el-row class="row_product">
-              <el-col :span="2"> <span>采购总价</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.purchaseTotalPrice"></el-input></el-col>
-              <el-col :span="3"> <span>总箱数</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.totalBox"></el-input></el-col>
-              <el-col :span="3"> <span>总体积</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.totalVolume"></el-input></el-col>
-            </el-row>
-            <el-row class="row_product">
-              <el-col :span="2"> <span>总毛重</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.totalRoughWeight"></el-input></el-col>
-              <el-col :span="3"> <span>总净重</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.totalNetWeight"></el-input></el-col>
-              <el-col :span="3"> <span>下单数量</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.orderCount"></el-input></el-col>
-            </el-row>
-            <el-row class="row_product">
-              <el-col :span="2"> <span>未下单数量</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.noOrderCount"></el-input></el-col>
-              <el-col :span="3"> <span>发货数量</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.sendCount"></el-input></el-col>
-              <el-col :span="3"> <span>未发货数量</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.unsentCount"></el-input></el-col>
+              <el-col :span="2"> <span>宗教信仰</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.outBoxVolume"></el-input></el-col>
+              <el-col :span="3"> <span>兴趣爱好</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.freightNum"></el-input></el-col>
+              <el-col :span="3"> <span>备注</span></el-col><el-col :span="5"> <el-input v-model="orderProduct.packageMethod"></el-input></el-col>
             </el-row>
             <el-row style="text-align: right;">
               <el-button type="primary" @click="cancelProduct">取消</el-button>
@@ -208,7 +149,7 @@
 
       <!--新增费用明细信息-->
       <el-dialog
-        title="费用信息"
+        title="出差线路"
         :visible.sync="charge_dialogVisible"
         width="70%"
         center
@@ -221,9 +162,18 @@
               <el-col :span="0"><span>index</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.index"></el-input></el-col>
             </el-row>
             <el-row class="row_product">
-              <el-col :span="2"><span>费用名称</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.chargeName"></el-input></el-col>
-              <el-col :span="3"><span>金额</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.chargeMoney"></el-input> </el-col>
-              <el-col :span="3"><span>描述</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.description"></el-input> </el-col>
+              <el-col :span="2"><span>出发地</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.chargeName"></el-input></el-col>
+              <el-col :span="2"><span>目的地</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.chargeMoney"></el-input> </el-col>
+              <el-col :span="2"><span>交通工具</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.description"></el-input> </el-col>
+            </el-row>
+            <el-row class="row_product">
+              <el-col :span="2"><span>用时</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.chargeName"></el-input></el-col>
+              <el-col :span="2"><span>车费</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.chargeMoney"></el-input> </el-col>
+              <el-col :span="2"><span>住宿地</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.description"></el-input> </el-col>
+            </el-row>
+            <el-row class="row_product">
+              <el-col :span="2"><span>住宿费用</span> </el-col> <el-col :span="5"><el-input v-model="orderCharge.chargeName"></el-input></el-col>
+              <el-col :span="2"><span>备注</span> </el-col> <el-col :span="12"><el-input style="margin-left: 20px" type="textarea" :rows="2" :readonly = "readOnly" v-model="order.descp"/></el-col>
             </el-row>
             <el-row style="text-align: right;">
               <el-button type="primary" @click="cancelCharge">取消</el-button>
@@ -447,12 +397,12 @@
       saveCharge:function(){
         console.log("保存销售订单费用");
         console.log(this.orderCharge);
-     // 没有index，则是新增数据
+        // 没有index，则是新增数据
         if(this.orderCharge.index == '' || this.orderCharge.index == undefined){
           this.orderCharge.index = this.order.orderChargeList.length;
           this.order.orderChargeList.push(this.orderCharge);
         }
-          // 有index一般为修改
+        // 有index一般为修改
         else{
           this.order.orderChargeList.splice(this.orderCharge.index,1);
           this.order.orderChargeList.splice(this.orderCharge.index,0,JSON.parse(JSON.stringify(this.orderCharge)));
@@ -558,61 +508,6 @@
           }
         })
       }
-
-
-
-
-
-
-
-      /*// 新增费用信息(按钮)
-      addCharge:function () {
-        this.orderCharge.orderNumber = this.order.orderNumber;
-        this.charge_dialogVisible =true;
-      },
-      // 复制订单费用信息(按钮)
-      copyCharge:function () {
-        if(this.checkedRowsCharge.length != 1){
-          this.$message({
-            showClose: true,
-            message: '请选择一条数据',
-            type: 'warning'
-          });
-        }else{
-          this.orderCharge = JSON.parse(JSON.stringify(this.checkedRowsCharge[0]));
-          this.orderCharge.id = '';
-          this.product_dialogVisible = true;
-        }
-      },
-      // 关闭费用信息模态框
-      cancelCharge:function () {
-        this.$confirm('关闭后将不做任何操作，确认关闭？')
-          .then(_ => {
-            this.charge_dialogVisible = false;
-            this.orderCharge = {};
-          })
-          .catch(_ => {});
-      },
-      // 保存费用信息
-      saveCharge:function () {
-        // 存在ID则是修改
-        if(this.orderCharge.id){
-
-        }
-        // 不存在ID则是新增
-        else{
-          addCharge(this.orderCharge).then(res=>{
-            this.$message({
-              showClose: true,
-              message: '保存成功~',
-              type: 'success'
-            });
-            this.charge_dialogVisible = false;
-            this.order.orderChargeList.push(this.orderCharge);
-            this.orderCharge = {};
-          })
-        }
-      }*/
     }
   }
 </script>
@@ -672,6 +567,10 @@
       .el-input__inner{
         height 30px
         width 170px
+      }
+
+      .el-textarea__inner{
+        width 95%
       }
       // 产品操作功能列表
       .div_product{

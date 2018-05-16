@@ -23,11 +23,11 @@
             <i class="el-icon-arrow-right"></i>
             <span slot="title">产品档案</span>
           </el-menu-item>
-          <el-menu-item index="/1-1-7">
+          <el-menu-item index="/customer">
             <i class="el-icon-arrow-right"></i>
             <span slot="title">客户档案</span>
           </el-menu-item>
-          <el-menu-item index="1-1-2">
+          <el-menu-item index="/Supplier">
             <i class="el-icon-arrow-right"></i>
             <span slot="title">供应商档案</span>
           </el-menu-item>

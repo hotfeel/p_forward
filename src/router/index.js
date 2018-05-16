@@ -5,6 +5,10 @@ import DepartManage from '@/container/departManage/departManage'
 import Undo from '@/components/m_common/undo.vue'
 import QueryOrder from '@/container/order/queryOrder'
 import OrderDetail from '@/container/order/orderDetail'
+import Customer from '@/container/customer/queryCustomer'
+import CustomerDetail from '@/container/customer/customerDetail'
+import Supplier from '@/container/supplier/querySupplier'
+import SupplierDetail from '@/container/supplier/SupplierDetail'
 import Demo from '@/container/demo/demo'
 import Demo2 from '@/container/demo/demo2'
 import Demo3 from '@/container/demo/demo3'
@@ -22,6 +26,22 @@ export default new Router({
       path: '/Home',
       name: 'Home',
       component: Home
+    },{
+      path: '/Customer',
+      name: 'Customer',
+      component: Customer
+    },{
+      path: '/CustomerDetail',
+      name: 'CustomerDetail',
+      component: CustomerDetail
+    },{
+      path: '/Supplier',
+      name: 'Supplier',
+      component: Supplier
+    },{
+      path: '/SupplierDetail',
+      name: 'SupplierDetail',
+      component: SupplierDetail
     },
     {
       path: '/departManage',
