@@ -2,7 +2,6 @@
   <el-container class="e_main">
     <el-header height="50px">
       <el-row class="e_common e_row_header">
-        <!--<c-top-query style="float: left"></c-top-query>-->
         <div class="query_div">
           <el-row class="query_row">
             <el-button type="primary"
@@ -17,69 +16,55 @@
           <transition name="q_trans">
             <div class="box" v-show="boxshow">
               <el-row>
-                <el-input v-model="orderCondition.conditionKey" placeholder="请输入关键字" class="inpt_key"></el-input>
-                <span>(销售订单号/客户订单号/客户编号)</span>
+                <el-input v-model="customerCondition.conditionKey" placeholder="请输入关键字" class="inpt_key"></el-input>
+                <span>(客户编号/客户简称/客户名称)</span>
                 <el-collapse>
-                  <el-collapse-item> <template slot="title">  合同时间 </template>
-                    <span>起：</span><el-date-picker v-model="orderCondition.startConstractDate" type="date" placeholder="选择日期(00:00:00)"> </el-date-picker>
-                    <span>止：</span> <el-date-picker v-model="orderCondition.endConstractDate" type="date" placeholder="选择日期(23:59:59)"> </el-date-picker>
+                  <el-collapse-item title="地址"><el-input v-model="customerCondition.address" placeholder="请输入内容"></el-input> </el-collapse-item>
+                  <el-collapse-item title="城市"><el-input v-model="customerCondition.city" placeholder="请输入内容"></el-input> </el-collapse-item>
+                  <el-collapse-item title="客户来源"><el-input v-model="customerCondition.source" placeholder="请输入内容"></el-input> </el-collapse-item>
+                  <el-collapse-item title="合作等级"><el-input v-model="customerCondition.corporateLevel" placeholder="请输入内容"></el-input> </el-collapse-item>
+                  <el-collapse-item title="业务员"><el-input v-model="customerCondition.salesman" placeholder="请输入内容"></el-input> </el-collapse-item>
+                  <el-collapse-item title="经营业务"><el-input v-model="customerCondition.business" placeholder="请输入内容"></el-input> </el-collapse-item>
+                  <el-collapse-item title="建档时间">
+                    <span>起：</span> <el-date-picker v-model="customerCondition.startCreateDate" type="date" placeholder="选择日期(00:00:00)"> </el-date-picker>
+                    <span>止：</span><el-date-picker v-model="customerCondition.endCreateDate" type="date" placeholder="选择日期(23:59:59)"> </el-date-picker>
                   </el-collapse-item>
-                  <el-collapse-item title="交货时间">
-                    <span>起：</span> <el-date-picker v-model="orderCondition.startDeliveryDate" type="date" placeholder="选择日期(00:00:00)"> </el-date-picker>
-                    <span>止：</span><el-date-picker v-model="orderCondition.endDeliveryDate" type="date" placeholder="选择日期(23:59:59)"> </el-date-picker>
-                  </el-collapse-item>
-                  <el-collapse-item title="客户简称"><el-input v-model="orderCondition.custShortName" placeholder="请输入内容"></el-input> </el-collapse-item>
-                  <el-collapse-item title="付款方式">
-                    <el-select v-model="orderCondition.paymentWay" clearable placeholder="请选择">
-                      <el-option
-                        v-for="item in options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                      </el-option>
-                    </el-select>
-                  </el-collapse-item>
-                  <el-collapse-item title="我方公司"><el-input v-model="orderCondition.ownCompany" placeholder="请输入内容"></el-input></el-collapse-item>
-                  <el-collapse-item title="业务员"><el-input v-model="orderCondition.courier" placeholder="请输入内容"></el-input></el-collapse-item>
                 </el-collapse>
               </el-row>
               <el-row class="box_bottom">
-                <el-button @click="queryOrderByCondition">查询</el-button>
+                <el-button @click="queryCustomerByCondition">查询</el-button>
                 <el-button @click="btn_reset">重置</el-button>
               </el-row>
             </div>
           </transition>
         </div>
-        <el-button icon="el-icon-edit" class="btn_common" @click="toOrderDetail">新建</el-button>
+        <el-button icon="el-icon-edit" class="btn_common" @click="toCustomerDetail">新建</el-button>
         <!--<el-button icon="el-icon-delete" class="btn_common">删除</el-button>-->
       </el-row>
     </el-header>
     <el-main style="height: 100%;">
       <el-row class="e_common" style="padding: 7px 5px 0px 7px">
-        <el-table :data="orderList" style="width: 100%"  height="94%" stripe border @cell-dblclick="cellDblclick">
+        <el-table :data="customerList" style="width: 100%"  height="94%" stripe bcustomer @cell-dblclick="cellDblclick">
           <el-table-column fixed type="selection" width="35"></el-table-column>
           <el-table-column fixed label="操作" width="90">
             <template slot-scope="scope">
-              <a class="el-icon-search" title="详情查询" @click="queryOrderDetail(scope.$index, scope)"></a>
-              <a class="el-icon-edit" title="编辑" @click="queryOrderDetail(scope.$index, scope)"></a>
+              <a class="el-icon-search" title="详情查询" @click="queryCustomerDetail(scope.$index, scope)"></a>
+              <a class="el-icon-edit" title="编辑" @click="queryCustomerDetail(scope.$index, scope)"></a>
               <a class="el-icon-delete" title="删除" @click="deleteRow(scope.$index, scope)"></a>
             </template>
           </el-table-column>
-          <el-table-column fixed prop="orderNumber" label="销售订单号" sortable width="150px"> </el-table-column>
-          <el-table-column prop="custNumber" sortable label="客户编号" width="160"> </el-table-column>
-          <el-table-column prop="custShortName" sortable label="客户简称" width="120"> </el-table-column>
-          <el-table-column sortable prop="constractDate" label="合同日期" :formatter="dateFormat" width="170"></el-table-column>
-          <el-table-column prop="deliveryDate" label="交货日期" :formatter="dateFormat" width="170"> </el-table-column>
-          <el-table-column prop="ownCompany" label="我方公司" width="140"> </el-table-column>
-          <el-table-column prop="currency" label="币种" width="120"> </el-table-column>
-          <el-table-column prop="courier" label="业务员" width="120"> </el-table-column>
+          <el-table-column fixed prop="code" label="客户编号" sortable width="150px"> </el-table-column>
+          <el-table-column prop="shortName" sortable label="客户简称" width="160"> </el-table-column>
+          <el-table-column prop="name" sortable label="客户名称" width="120"> </el-table-column>
+          <el-table-column prop="county" label="区域" width="120"> </el-table-column>
+          <el-table-column prop="province" label="省份" width="120"> </el-table-column>
+          <el-table-column prop="source" label="客户来源" width="120"> </el-table-column>
+          <el-table-column prop="corporateLevel" sortable label="合作等级" width="120"> </el-table-column>
+          <el-table-column prop="salesman" label="业务员" width="120"> </el-table-column>
           <el-table-column prop="paymentWay" label="付款方式" width="120"> </el-table-column>
-          <el-table-column prop="totalGoodsValue" label="总货值" width="120"> </el-table-column>
-          <el-table-column prop="totalCost" label="费用合计" width="120"> </el-table-column>
-          <el-table-column prop="totalMoney" label="总金额" width="120"> </el-table-column>
-          <el-table-column prop="grossProfit" label="毛利金额" width="120"> </el-table-column>
-          <el-table-column prop="createDate" label="制单日期" width="120" :formatter="dateFormat"> </el-table-column>
-          <el-table-column prop="creator" label="制单人" width="120"> </el-table-column>
+          <el-table-column prop="business" label="经营业务" width="120"> </el-table-column>
+          <el-table-column prop="ticketInfo" label="开票信息" width="120"> </el-table-column>
+          <el-table-column prop="modifyDate" label="修改时间" :formatter="dateFormat" width="120"> </el-table-column>
         </el-table>
         <el-row style="height:6%;text-align:center;">
           <el-pagination
@@ -94,25 +79,13 @@
         </el-row>
       </el-row>
     </el-main>
-    <el-footer>
-      <el-row class="e_common d_el_footer">
-        <span>总货值</span>
-        <el-input v-model="input1" placeholder="0"/>
-        <span>费用合计</span>
-        <el-input v-model="input2" placeholder="0"/>
-        <span>总金额</span>
-        <el-input v-model="input3" placeholder="0"/>
-        <span>毛利金额</span>
-        <el-input v-model="input4" placeholder="0"/>
-      </el-row>
-    </el-footer>
   </el-container>
 </template>
 <script>
   import Moment from 'moment'
   import CTopQuery from '@/components/m_common/topQuery'
   import ElFooter from "element-ui/packages/footer/src/main";
-  import { queryOrderList,deleteOrder,queryOrderByCondition} from '@/api/modules/order'
+  import { queryCustomerByCondition} from '@/api/modules/customer'
 
   export  default {
     components:{
@@ -131,10 +104,10 @@
           pageSize:10,
           totalCount:0
         },
-        orderList:[],
+        customerList:[],
         queryBtn_active : true,
         boxshow : false,
-        orderCondition:{},
+        customerCondition:{},
         options: [{
           value: '选项1',
           label: '现金'
@@ -151,13 +124,13 @@
       }
     },
     created(){
-      this.queryOrderList();
+      this.queryCustomerByCondition();
     },
     methods:{
       // 删除某条数据
       deleteRow:function (index,row) {
         deleteOrder(row.row);
-        this.orderList.splice(index,1);
+        this.customerList.splice(index,1);
         this.page.totalCount = this.page.totalCount-1;
         this.$message({
           showClose: true,
@@ -170,17 +143,18 @@
         row2.row = row;
         this.queryOrderDetail(0,row2);
       },
-      // 根据条件查询订单列表
-      queryOrderByCondition:function(){
-        queryOrderByCondition(this.orderCondition).then(res=>{
-          this.togglebox();
-          this.orderList = res.data;
+      // 根据条件查询客户列表
+      queryCustomerByCondition:function(){
+        queryCustomerByCondition(this.customerCondition).then(res=>{
+          this.boxshow = false;
+          this.queryBtn_active = false;
+          this.customerList = res.data;
           this.page = res.page;
         });
       },
-      // 查看订单详情
-      queryOrderDetail:function(index,row){
-        this.$router.push({name:'orderDetail',query:{orderNumber:row.row.orderNumber}});
+      // 查看客户详情
+      queryCustomerDetail:function(index,row){
+        this.$router.push({name:'CustomerDetail',query:{customerCode:row.row.code}});
       },
       dateFormat:function(row, column, cellValue, index){
         // ("YYYY-MM-DD HH:mm:ss");
@@ -190,22 +164,8 @@
           return "";
         }
       },
-      toOrderDetail:function(){
-        this.$router.push({name:'orderDetail'});
-      },
-      queryOrderList(){
-        queryOrderByCondition(this.orderCondition).then(res=>{
-          //this.togglebox();
-          this.orderList = res.data;
-          this.page = res.page;
-        });
-        /*queryOrderList().then(res=>{
-          this.orderList.length = 0;
-          this.orderList = res;
-          if(res.page){
-            this.page = res.page;
-          }
-        })*/
+      toCustomerDetail:function(){
+        this.$router.push({name:'CustomerDetail'});
       },
       handleSizeChange(){
 
@@ -219,7 +179,7 @@
         this.queryBtn_active = !this.queryBtn_active;
       },
       btn_reset:function(){
-        this.orderCondition={};
+        this.customerCondition={};
       }
     }
 
@@ -245,7 +205,7 @@
       line-height 18px
       color gray
     }
-    // 订单列表前方操作按钮样式
+    // 客户列表前方操作按钮样式
     .el-table__row{
       a{
         //color #409eff

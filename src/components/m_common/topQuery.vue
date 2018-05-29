@@ -134,7 +134,6 @@
 <style lang="stylus" >
   .query_div{
     width 90px
-  }
   // 整个大的查询头部DIV
   .query_row{
     // 重置element-ui上的按钮样式
@@ -238,5 +237,6 @@
   .q_trans-enter,.q_trans-leave-to{
     transform: translateX(30px);
     opacity: 0;
+  }
   }
 </style>
