@@ -9,6 +9,7 @@ import Customer from '@/container/customer/queryCustomer'
 import CustomerDetail from '@/container/customer/customerDetail'
 import Supplier from '@/container/supplier/querySupplier'
 import SupplierDetail from '@/container/supplier/SupplierDetail'
+import Department from '@/container/base/department'
 import Demo from '@/container/demo/demo'
 import Demo2 from '@/container/demo/demo2'
 import Demo3 from '@/container/demo/demo3'
@@ -20,8 +21,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'Department',
+      component: Department
     },{
       path: '/Home',
       name: 'Home',
@@ -30,7 +31,13 @@ export default new Router({
       path: '/Customer',
       name: 'Customer',
       component: Customer
-    },{
+    },
+    {
+      path:'/Department',
+      name:'Department',
+      component:Department
+    },
+    {
       path: '/CustomerDetail',
       name: 'CustomerDetail',
       component: CustomerDetail

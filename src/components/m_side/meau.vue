@@ -202,6 +202,10 @@
             <i class="el-icon-arrow-right"/>
             <span>用户管理</span>
           </el-menu-item>
+          <el-menu-item index="/Department">
+            <i class="el-icon-arrow-right"/>
+            <span>部门管理</span>
+          </el-menu-item>
         </el-submenu>
       </el-menu>
     </el-col>

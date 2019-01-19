@@ -13,7 +13,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "babel-runtime": "^6.26.0",
-    "element-ui": "^2.2.2",
+    "element-ui": "^2.4.11",
     "immutable": "^3.8.2",
     "jsbarcode": "^3.8.0",
     "lodash": "^4.17.4",

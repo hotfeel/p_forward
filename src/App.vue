@@ -1,11 +1,11 @@
 <template>
   <div id="app">
       <el-container>
-        <el-header style="height: 30px;">
+        <el-header style="height: 40px;">
           <c-header></c-header>
         </el-header>
         <el-container>
-          <el-aside width="200px">
+          <el-aside style="width: auto">
             <m-meau></m-meau>
           </el-aside>
           <el-main>
@@ -18,7 +18,7 @@
 
 <script>
   import CHeader from '@/components/m_header/head'
-  import MMeau from '@/components/m_side/meau'
+  import MMeau from '@/components/m_side/meau2'
   import CHome from '@/container/home/home'
   import ElRow from "element-ui/packages/row/src/row";
 
