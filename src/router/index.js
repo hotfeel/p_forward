@@ -1,19 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/container/home/home'
-import DepartManage from '@/container/departManage/departManage'
-import Undo from '@/components/m_common/undo.vue'
-import QueryOrder from '@/container/order/queryOrder'
-import OrderDetail from '@/container/order/orderDetail'
-import Customer from '@/container/customer/queryCustomer'
-import CustomerDetail from '@/container/customer/customerDetail'
-import Supplier from '@/container/supplier/querySupplier'
-import SupplierDetail from '@/container/supplier/SupplierDetail'
-import Department from '@/container/base/department'
+import Login from '@/container/login/login'
 import Demo from '@/container/demo/demo'
-import Demo2 from '@/container/demo/demo2'
-import Demo3 from '@/container/demo/demo3'
-
+import Home from '@/container/home/home'
+import Index from '@/container'
 
 Vue.use(Router)
 
@@ -21,66 +11,31 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Department',
-      component: Department
-    },{
-      path: '/Home',
-      name: 'Home',
-      component: Home
-    },{
-      path: '/Customer',
-      name: 'Customer',
-      component: Customer
+      name: 'Index',
+      component: Index,
+      children: [
+        {
+          // 当 /user/:id/profile 匹配成功，
+          // UserProfile 会被渲染在 User 的 <router-view> 中
+          path: 'demo',
+          component: Demo
+        }
+      ]
     },
     {
-      path:'/Department',
-      name:'Department',
-      component:Department
+      path: '/Login',
+      name: 'Login',
+      component: Login
     },
     {
-      path: '/CustomerDetail',
-      name: 'CustomerDetail',
-      component: CustomerDetail
-    },{
-      path: '/Supplier',
-      name: 'Supplier',
-      component: Supplier
-    },{
-      path: '/SupplierDetail',
-      name: 'SupplierDetail',
-      component: SupplierDetail
-    },
-    {
-      path: '/departManage',
-      name: 'DepartManage',
-      component: DepartManage
-    },{
-      path: '/Demo3',
-      name: 'Demo3',
-      component: Demo3
-    },{
-      path: '/Demo',
-      name: 'Demo',
+      path: '/demo',
+      name: 'demo',
       component: Demo
-    },{
-      path: '/demo2',
-      name: 'Demo2',
-      component: Demo2
     },
     {
-      path:'/queryOrder',
-      name:'queryOrder',
-      component:QueryOrder
-    },
-    {
-      path:'/orderDetail',
-      name:'orderDetail',
-      component:OrderDetail
-    },
-    {
-      path: '*',
-      name: 'Undo',
-      component: Undo
+      path:'/Home',
+      name:'Home',
+      component:Home,
     }
   ]
 })

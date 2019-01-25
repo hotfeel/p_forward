@@ -41,9 +41,6 @@
     </el-main>
     <el-footer>
       <div class="span_class" @click="btn_openPanel">
-     <!--   <i class="iconfont icon-gengduo"
-           v-bind:class="[isCollapse ? 'collapse_active':'collapse_inactive']">
-        </i>-->
         <a class="iconfont icon-gengduo" style="float:right" v-bind:class="[isCollapse ? 'collapse_active':'collapse_inactive']"  title="收缩侧边栏" />
       </div>
     </el-footer>
@@ -51,11 +48,19 @@
 </template>
 
 <script>
+
+  import {queryAllMeau} from '@/api/modules/base'
+
   export default {
     data() {
       return {
         isCollapse: true
       };
+    },
+    created:function(){
+      /*queryAllMeau().then(res=>{
+        console.log("queryAllMeau",res)
+      });*/
     },
     methods: {
       handleOpen(key, keyPath) {

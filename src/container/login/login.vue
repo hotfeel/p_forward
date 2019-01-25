@@ -63,7 +63,7 @@
     },
     methods:{
       tabClick(tab, event) {
-         //this.leftLinkLabel = (tab.name=='mobileLogin'?'账号登录':'手机登录');
+        //this.leftLinkLabel = (tab.name=='mobileLogin'?'账号登录':'手机登录');
       }
     }
   }
@@ -107,7 +107,7 @@
       height 40px
       padding 0px 10px
       width 82px
-      font-size 4px
+      font-size 10px
     }
   }
 </style>

@@ -16,6 +16,8 @@
     "element-ui": "^2.4.11",
     "immutable": "^3.8.2",
     "jsbarcode": "^3.8.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
     "vue": "^2.5.2",

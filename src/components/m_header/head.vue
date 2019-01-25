@@ -4,17 +4,20 @@
       <span>【 {{date}} 】</span>
       <span>罗典的系统</span>
     </div>
-    <div class="head_right">
+    <div class="head_right" id="luodian">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-submenu index="2">
-          <template slot="title" style="height:40px;">
+        <el-submenu index="2" popper-class="head-class">
+          <template slot="title">
             <svg class="icon" style="font-size: 30px;" aria-hidden="true">
-            <use xlink:href="#icon-boy"></use>
-          </svg>
+              <use xlink:href="#icon-boy"></use>
+            </svg>
           </template>
-          <el-menu-item index="2-1">个人资料</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-          <el-menu-item index="2-3">选项3</el-menu-item>
+          <el-menu-item index="2-1" style="border-bottom: #e7eaed solid 1px;padding-bottom: 10px;">个人资料</el-menu-item>
+          <el-menu-item index="2-2" >我的任务</el-menu-item>
+          <el-menu-item index="2-2" >关注</el-menu-item>
+          <el-menu-item index="2-2" >收藏</el-menu-item>
+          <el-menu-item index="2-3" style="border-bottom: #e7eaed solid 1px;padding-bottom: 10px;">设置</el-menu-item>
+          <el-menu-item index="2-4">注销</el-menu-item>
         </el-submenu>
       </el-menu>
     </div>
@@ -27,7 +30,8 @@
   export default {
     data(){
       return {
-        date : ""
+        date : "",
+        activeIndex:'1'
       }
     },
     created(){
@@ -36,6 +40,9 @@
     methods: {
       logoutEvent () {
         console.log('退出')
+      },
+      handleSelect(){
+
       }
     }
   }
@@ -50,26 +57,34 @@
     font-size 14px
     font-family "微软雅黑"
   }
+    .el-menu-demo{
+      border 0px
+    }
   .el-submenu{
     background-color #225184
+  }
+  .el-menu--horizontal .el-menu .el-menu-item{
+    color dimgray
+    //background-color #f5f5f5
   }
   .el-menu--horizontal>>>.el-submenu .el-submenu__title{
     height 40px
     line-height 40px
+    width 80px
+  }
+  .el-menu--horizontal>>>.el-submenu.is-active .el-submenu__title{
+    border-bottom none
   }
   .el-menu--horizontal>>>.el-submenu .el-submenu__title:hover{
-    background-color #3673b1
+    background-color #3673b1;
   }
-    .el-menu-demo{
-      border none
-    }
+
   .head_left{
     display flex
     height 40px
     align-items center
     text-indent 20px
     justify-content space-between
-    color rgba(54,115,177,0.26)
   }
   .head_right{
     height 40px
@@ -87,4 +102,16 @@
       width 10px
     }
 
+</style>
+<style lang="stylus">
+  .head-class{
+    .el-menu--popup{
+      min-width 130px
+      padding 0px
+    }
+    .el-menu-item{
+      height 30px !important
+      line-height 30px !important
+    }
+  }
 </style>
