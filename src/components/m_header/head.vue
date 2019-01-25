@@ -5,6 +5,12 @@
       <span>罗典的系统</span>
     </div>
     <div class="head_right" id="luodian">
+      <el-input placeholder="请输入内容" v-model="topInput" class="input_topInput">
+        <el-button slot="append" icon="el-icon-search"></el-button>
+      </el-input>
+      <el-badge :value="12">
+        <el-button size="small" icon="el-icon-bell" class="btn-bell"></el-button>
+      </el-badge>
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <el-submenu index="2" popper-class="head-class">
           <template slot="title">
@@ -31,7 +37,8 @@
     data(){
       return {
         date : "",
-        activeIndex:'1'
+        activeIndex:'1',
+        topInput:''
       }
     },
     created(){
@@ -101,6 +108,32 @@
   .el-badge__content.is-fixed{
       width 10px
     }
+  .btn-bell{
+    background-color #225184
+    border none
+    color white
+    font-size 18px
+    padding 9px 19px
+  }
+  .btn-bell:hover{
+    background-color #3673b1;
+  }
+  .el-badge >>> .el-badge__content.is-fixed{
+    top 11px
+    right 24px
+  }
+  .el-badge >>> .el-badge__content{
+    padding 0px 1px
+    line-height 14px
+    height 14px
+  }
+    .el-input-group>>>.el-input__inner{
+      height 30px
+      line-height 30px
+      border none
+      background-color gray
+    }
+
 
 </style>
 <style lang="stylus">
@@ -114,4 +147,5 @@
       line-height 30px !important
     }
   }
+
 </style>
