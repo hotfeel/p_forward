@@ -12,6 +12,11 @@ Vue.use(Router)
 const router = new Router({
   routes: [
     {
+      path: '/Login',
+      name: 'Login',
+      component: Login
+    },
+    {
       path: '/',
       name: 'Index',
       component: Index,
@@ -38,11 +43,6 @@ const router = new Router({
           component:Undo
         }
       ]
-    },
-    {
-      path: '/Login',
-      name: 'Login',
-      component: Login
     },
     {
       path: '/demo',

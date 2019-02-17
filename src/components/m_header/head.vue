@@ -5,20 +5,20 @@
       <span>罗典的系统</span>
     </div>
     <div class="head_right" id="luodian">
-      <el-input placeholder="请输入内容" v-model="topInput" class="input_topInput">
+      <el-input placeholder="订单号/客户编码/员工姓名" v-model="topInput">
         <el-button slot="append" icon="el-icon-search"></el-button>
       </el-input>
       <el-badge :value="12">
         <el-button size="small" icon="el-icon-bell" class="btn-bell"></el-button>
       </el-badge>
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"         :router="true">
         <el-submenu index="2" popper-class="head-class">
           <template slot="title">
             <svg class="icon" style="font-size: 30px;" aria-hidden="true">
               <use xlink:href="#icon-boy"></use>
             </svg>
           </template>
-          <el-menu-item index="2-1" style="border-bottom: #e7eaed solid 1px;padding-bottom: 10px;">个人资料</el-menu-item>
+          <el-menu-item index="userManage" style="border-bottom: #e7eaed solid 1px;padding-bottom: 10px;">个人资料</el-menu-item>
           <el-menu-item index="2-2" >我的任务</el-menu-item>
           <el-menu-item index="2-2" >关注</el-menu-item>
           <el-menu-item index="2-2" >收藏</el-menu-item>
@@ -131,8 +131,18 @@
       height 30px
       line-height 30px
       border none
-      background-color gray
     }
+  .el-input-group>>>.el-input-group__append{
+    padding 0px 10px !important
+    border-left 1px solid #dcdfe6
+  }
+  .el-input-group>>>.el-input-group__append .el-button{
+    margin 0px
+  }
+  .el-input-group>>>.el-button--default{
+    padding 0px
+
+  }
 
 
 </style>
