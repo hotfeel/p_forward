@@ -12,8 +12,8 @@
             <el-tabs v-model="activeName" style="height: 200px;" @tab-click="tabClick">
               <el-tab-pane label="" :disabled="true" ></el-tab-pane>
               <el-tab-pane label="账号登录" name="accountLogin">
-                <el-input v-model="userName" placeholder="输入账号/手机号/邮箱"/>
-                <el-input type="password" autocomplete="off" placeholder="输入密码"/>
+                <el-input v-model="userInfo.userName" placeholder="输入账号/手机号/邮箱"/>
+                <el-input v-model="userInfo.passward" type="password" autocomplete="off" placeholder="输入密码"/>
               </el-tab-pane>
               <el-tab-pane label="" :disabled="true" ></el-tab-pane>
               <el-tab-pane label="手机登录" name="mobileLogin">
@@ -38,7 +38,7 @@
             <a href="#" style="color: #4386F4;padding-left: 20px;font-size: 14px;"><!--{{leftLinkLabel}}--></a>
             <a href="#" style="color: #4386F4;padding-right: 20px;font-size: 14px;">忘记密码</a>
           </div>
-          <el-button type="primary" style="width: 300px;border: none">登录</el-button>
+          <el-button type="primary" style="width: 300px;border: none" @click="btnLogin">登录</el-button>
         </div>
       </div>
     </el-main>
@@ -47,23 +47,60 @@
     </el-footer>
   </el-container>
 </template>
+
 <script>
+
+  import {loginUser} from "../../api/modules/login";
+
   export default {
     data(){
       return {
         phonePre:'+86',
         phonePres:[{label:'+86',value:'+86'}],
         activeName:'accountLogin',
-        userName:'',
+        userInfo:{
+          userName:'',
+          passward:''
+        },
         mobileNum:'',
         identifyCode:'',
         identifyCodeBtn:'获取验证码',
         leftLinkLabel:'手机登录'
       }
     },
+    created() {
+      // 必须先定义this，否则会提示btnLogin方法不存在
+      var lett = this;
+      document.onkeydown = function(e) {
+        var key = window.event.keyCode;
+        if (key == 13) {
+          lett.btnLogin();
+        }
+      }
+    },
     methods:{
       tabClick(tab, event) {
-        //this.leftLinkLabel = (tab.name=='mobileLogin'?'账号登录':'手机登录');
+
+      },
+      // 用户点击登录按钮
+      btnLogin(){
+        if(this.userInfo == null || this.userInfo.userName.length <= 0 || this.userInfo.passward.length <= 0){
+          this.$message({
+            showClose: true,
+            message: '账号或密码为空，请检查后重试~',
+            type: 'warning'
+          });
+        }else{
+          loginUser(this.userInfo).then(res=>{
+            // 将用户数据和token信息存入sessionStorage中
+            sessionStorage.clear();
+            sessionStorage.setItem("currentUser",res.data);
+            sessionStorage.setItem("token",res.data.id);
+            // 根据用户权限动态添加路由信息
+            sessionStorage.setItem("authoritys",JSON.stringify(res.data.authoritys));
+            this.$router.push("/");
+          });
+        }
       }
     }
   }

@@ -7,3 +7,10 @@ export const queryAllMeau = () => {
   })
 }
 
+// 查询所有菜单信息
+export const queryMeauByCondition = (condition) => {
+  return post({
+    url: '/base/queryMeauByCondition',
+    data: condition
+  })
+}

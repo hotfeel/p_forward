@@ -12,7 +12,7 @@
 
 
   export default {
-   name: 'App',
+    name: 'App',
     components:{
       ElRow,
       CHeader,
@@ -23,9 +23,9 @@
 </script>
 
 <style scoped lang="stylus">
-#app {
-  margin-top: 0px;
-  display block
-  height 100%
-}
+  #app {
+    margin-top: 0px;
+    display block
+    height 100%
+  }
 </style>
