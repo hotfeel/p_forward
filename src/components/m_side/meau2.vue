@@ -15,7 +15,7 @@
           <el-menu-item-group>
             <span slot="title">分组一</span>
             <el-menu-item index="/userManage">用户详情</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
+            <el-menu-item index="/queryOrder">订单管理</el-menu-item>
           </el-menu-item-group>
           <el-menu-item-group title="分组2">
             <el-menu-item index="1-3">选项3</el-menu-item>

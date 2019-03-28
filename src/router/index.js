@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Login from '@/container/login/login'
 import Demo from '@/container/demo/demo'
 import Order from '@/container/order/orderDetail'
+import QueryOrder from '@/container/order/queryOrder'
 import Home from '@/container/home/home'
 import Index from '@/container';
 import Undo from '@/components/m_common/undo';
@@ -68,6 +69,11 @@ function filterAsyncRouter(asyncRouterMap) {
     path:"/order",
     name:"order",
     component:Order
+  });
+  routerChildren.push({
+    path:"/queryOrder",
+    name:"QueryOrder",
+    component:QueryOrder
   });
   routerChildren.push({
     path:"/userManage",
