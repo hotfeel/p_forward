@@ -3,7 +3,7 @@
     <el-main>
       <el-menu default-active="1-4-1" class="el-menu-vertical-demo" :unique-opened="true"
                @open="handleOpen" @close="handleClose" :collapse="isCollapse"  :router="true">
-        <el-menu-item index="/undo">
+        <el-menu-item index="/aaa">
           <i class="iconfont icon-shouye"></i>
           <span slot="title">首页</span>
         </el-menu-item>

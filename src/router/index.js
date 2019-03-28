@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Login from '@/container/login/login'
 import Demo from '@/container/demo/demo'
+import Order from '@/container/order/orderDetail'
 import Home from '@/container/home/home'
 import Index from '@/container';
 import Undo from '@/components/m_common/undo';
@@ -57,6 +58,23 @@ function filterAsyncRouter(asyncRouterMap) {
         routerChildren.push(routerData);
       }
   });
+
+  routerChildren.push({
+    path:"/aaa",
+    name:"aaa",
+    component:Home
+  });
+  routerChildren.push({
+    path:"/order",
+    name:"order",
+    component:Order
+  });
+  routerChildren.push({
+    path:"/userManage",
+    name:"userManage",
+    component:UserManage
+  });
+
   // 配置一个全局404的子页面
   routerChildren.push({
     path:"*",
@@ -72,7 +90,7 @@ function filterAsyncRouter(asyncRouterMap) {
     {
       path: "/",
       component: resolve => require(["@/container"], resolve),
-      redirect: "meauMgr",
+      redirect: "userManage",
       children: routerChildren
     }
   ]
