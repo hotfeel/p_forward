@@ -67,6 +67,7 @@
       <el-table-column
         prop="modifyDate"
         label="修改日期"
+        width="160"
         :formatter="dateFormat">
       </el-table-column>
       <el-table-column
@@ -110,7 +111,7 @@
   export default {
     data(){
       return {
-        dialogVisible:true,
+        dialogVisible:false,
         meauList:[]
       }
     },

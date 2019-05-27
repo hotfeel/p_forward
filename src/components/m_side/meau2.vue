@@ -14,7 +14,7 @@
           </template>
           <el-menu-item-group>
             <span slot="title">分组一</span>
-            <el-menu-item index="/userManage">用户详情</el-menu-item>
+            <el-menu-item index="/userDetail">用户详情</el-menu-item>
             <el-menu-item index="/queryOrder">订单管理</el-menu-item>
           </el-menu-item-group>
           <el-menu-item-group title="分组2">
@@ -33,10 +33,16 @@
           <i class="el-icon-document"></i>
           <span slot="title">导航三</span>
         </el-menu-item>
-        <el-menu-item index="4">
-          <i class="el-icon-setting"></i>
-          <span slot="title">导航四</span>
-        </el-menu-item>
+        <el-submenu index="4">
+          <template slot="title">
+            <i class="el-icon-setting"></i>
+            <span slot="title">菜单管理</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="/meauMgr">菜单管理</el-menu-item>
+            <el-menu-item index="/userManage">用户管理</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
       </el-menu>
     </el-main>
     <el-footer>

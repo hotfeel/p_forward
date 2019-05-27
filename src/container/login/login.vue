@@ -35,7 +35,7 @@
             </el-tabs>
           </div>
           <div style="padding-bottom: 15px;justify-content:space-between;display:flex;}">
-            <a href="#" style="color: #4386F4;padding-left: 20px;font-size: 14px;"><!--{{leftLinkLabel}}--></a>
+            <a href="http://open.weixin.qq.com/connect/qrconnect?appid=wxecad8376fad4e6b7&redirect_uri=http://localhost:8443/login/unauth&response_type=code&scope=snsapi_login&state=595865#wechat_redirect" style="color: #4386F4;padding-left: 20px;font-size: 14px;">微信登录</a>
             <a href="#" style="color: #4386F4;padding-right: 20px;font-size: 14px;">忘记密码</a>
           </div>
           <el-button type="primary" style="width: 300px;border: none" @click="btnLogin">登录</el-button>
@@ -59,8 +59,8 @@
         phonePres:[{label:'+86',value:'+86'}],
         activeName:'accountLogin',
         userInfo:{
-          userName:'',
-          passward:''
+          userName:'luodian',
+          passward:'123456'
         },
         mobileNum:'',
         identifyCode:'',

@@ -18,7 +18,7 @@
               <use xlink:href="#icon-boy"></use>
             </svg>
           </template>
-          <el-menu-item index="userManage" style="border-bottom: #e7eaed solid 1px;padding-bottom: 10px;">个人资料</el-menu-item>
+          <el-menu-item index="userDetail" style="border-bottom: #e7eaed solid 1px;padding-bottom: 10px;">个人资料</el-menu-item>
           <el-menu-item index="2-2" >我的任务</el-menu-item>
           <el-menu-item index="2-2" >关注</el-menu-item>
           <el-menu-item index="2-2" >收藏</el-menu-item>
