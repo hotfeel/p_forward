@@ -20,7 +20,7 @@
     "jsbarcode": "^3.8.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.21",
     "moment": "^2.20.1",
     "vue": "^2.5.2",
     "vue-event-calendar": "^1.5.2",
